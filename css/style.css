@@ -1,12 +1,28 @@
-html,body{
+body, html{
 	margin: 0;
 	padding: 0;
 }
 
-a:hover{
-	background:#42b6f4;
+header{
+	width: 100%;
+	height: 200px;
+	background: grey;
 }
 
-header{
-	font-family: 'Cinzel', serif;
+footer{
+	width: 100%;
+	height: 200px;
+	background: grey;
+}
+
+.main-title{
+	text-align: center;
+}
+
+.art{
+	margin: 20px 0px;
+}
+
+.article-title{
+	padding-top: 10px;
 }
