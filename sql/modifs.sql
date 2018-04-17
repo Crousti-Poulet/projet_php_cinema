@@ -1,0 +1,1 @@
+ALTER TABLE `news` CHANGE `author` `user_id` INT NOT NULL;
