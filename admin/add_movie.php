@@ -68,8 +68,8 @@
 				$errors[] = 'Synopsis invalide (doit être compris entre 50 et 1000 caractères)';
 			}
 
-			if(!v::stringType()->length(4, 20)->validate($post['country'])) {
-				$errors[] = 'Pays invalide (doit être compris entre 4 et 20 caractères)';
+			if(!v::stringType()->length(2, 20)->validate($post['country'])) {
+				$errors[] = 'Pays invalide (doit être compris entre 2 et 20 caractères)';
 			}
 
 			if(count($errors) === 0){
