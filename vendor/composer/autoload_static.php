@@ -19,6 +19,10 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         array (
             'Respect\\Validation\\' => 19,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -29,6 +33,10 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         'Respect\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/respect/validation/library',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 

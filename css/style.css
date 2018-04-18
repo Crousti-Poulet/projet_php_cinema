@@ -14,9 +14,6 @@ main{
 .main-title{
 	text-align: center;
 }
-.actu-title{
-	text-align: center;
-}
 
 .art{
 	margin: 20px 0px;
@@ -26,8 +23,21 @@ main{
 	padding-top: 10px;
 }
 
-
 .article-p{
 	font-family: 'EB Garamond', serif;
+}
+
+.contact{
+	text-align: center;
+}
+
+.button{
+	background: #e2e2e2;
+}
+
+.button:hover{
+
+	background: #a3e1ff;
+	transition: 1s;
 }
 
