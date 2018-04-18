@@ -122,7 +122,17 @@
 
 		<!--Main start-->
 		<main class="container" id="main_bloc">
+				
+				<!-- Affichage des messages d'erreur -->
+				<?php if(isset($formValid) && $formValid == true):?>
+	
+				<p style="color:green;">Votre réservation a été validée</p>
 			
+				<?php elseif(isset($formValid) && $formValid == false):?>
+				
+				<p style="color:red;"><?=implode('<br>', $errors);?></p>
+				<?php endif;?>
+
 			<!-- Form start -->
 			<form class="mx-auto" method="POST" id="myForm" enctype="multipart/form-data">
 				
@@ -131,64 +141,55 @@
 				<br>
 				
 				<label for="title">Titre :</label>
-				<input class="form-control" type="text" name="title" id="title" ><br>
+				<input class="form-control" type="text" name="title" id="title" value="<?php if (isset($post['title'])){echo $post['title'];} ?>" ><br>
 
 				<label for="date_release">Date de sortie :</label>
-				<input class="form-control" type="date" name="date_release" id="date_release" ><br>
+				<input class="form-control" type="date" name="date_release" id="date_release" value="<?php if (isset($_POST['date_release'])){echo $_POST['date_release'];} ?>"><br>
 				
 				<label for="actors">Acteurs :</label>
-				<input class="form-control" type="text" name="actors" id="actors" ><br>
+				<input class="form-control" type="text" name="actors" id="actors" value="<?php if (isset($_POST['actors'])){echo $_POST['actors'];} ?>" ><br>
 
 				<label for="director">Réalisateur :</label>
-				<input class="form-control" type="text" name="director" id="director" ><br>
+				<input class="form-control" type="text" name="director" id="director" value="<?php if (isset($_POST['director'])){echo $_POST['director'];} ?>"><br>
 
 				<label for="length">Durée (en minutes) :</label>
-				<input class="form-control" type="text" name="length" id="length" ><br>
+				<input class="form-control" type="text" name="length" id="length" value="<?php if (isset($_POST['length'])){echo $_POST['length'];} ?>"><br>
 				
 				<label for="country">Pays :</label>
-				<input class="form-control" type="text" name="country" id="country" ><br>
+				<input class="form-control" type="text" name="country" id="country" value="<?php if (isset($_POST['country'])){echo $_POST['country'];} ?>"><br>
 				
 				<label for="genre">Genre :</label>
-				<select class="form-control" name="genre" id="genre">
+				<select class="form-control" name="genre" id="genre value="<?php echo isset($_POST['genre']) ? $_POST['genre'] : '' ?>">
 
 					<option value="select">-Sélectionner-</option>
-					<option value="comedy">Comédie</option>
-					<option value="sci-fi">Science-fiction</option>
-					<option value="horror">Horreur</option>
-					<option value="romance">Romance</option>
-					<option value="action">Action</option>
-					<option value="thriller">Thriller</option>
-					<option value="drama">Drame</option>
-					<option value="mystery">Mistère</option>
-					<option value="Crime">Policier</option>
-					<option value="animation">Animation</option>
-					<option value="adventure">Aventure</option>
-					<option value="Fantasy">Fantastique</option>
-					<option value="comedy_romance">Comédie romantique</option>
-					<option value="action_comedy">Comédie d'action</option>
-					<option value="superhero">Superhero</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Comédie") echo 'selected'; ?> value="comedy">Comédie</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Science fiction") echo 'selected'; ?> value="sci-fi">Science-fiction</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Horreur") echo 'selected'; ?> value="horror">Horreur</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Romance") echo 'selected'; ?> value="romance">Romance</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Action") echo 'selected'; ?> value="action">Action</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Thriller") echo 'selected'; ?> value="thriller">Thriller</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Drame") echo 'selected'; ?> value="drama">Drame</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Mistère") echo 'selected'; ?> value="mystery">Mistère</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Policier") echo 'selected'; ?> value="Crime">Policier</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Animation") echo 'selected'; ?> value="animation">Animation</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Aventure") echo 'selected'; ?> value="adventure">Aventure</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Fantastique") echo 'selected'; ?> value="Fantasy">Fantastique</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Comédie romantique") echo 'selected'; ?> value="comedy_romance">Comédie romantique</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Comédie d'action") echo 'selected'; ?> value="action_comedy">Comédie d'action</option>
+					<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Superhero") echo 'selected'; ?> value="superhero">Superhero</option>
 
 				</select><br>
 
 				<label for="storyline">Synopsis :</label>
-				<textarea class="form-control" name="storyline" id="storyline" rows="6"></textarea><br>
+				<textarea class="form-control" name="storyline" id="storyline" rows="6"><?php if (isset($post['storyline'])){echo $post['storyline'];} ?></textarea><br>
 
 				<label for="picture">Image :</label>
-				<input class="form-control" type="file" name="picture" id="picture" ><br>
+				<input class="form-control" type="file" name="picture" id="picture"><br>
 
 				<input class="btn" type="submit" name="submit" id="submit" value="Valider">
 
 			</form><br><br>
 			<!-- Form end -->
-
-				<?php if(isset($formValid) && $formValid == true):?>
-	
-				<p style="color:green;">Votre réservation a été validée</p>
-			
-				<?php elseif(isset($formValid) && $formValid == false):?>
-				
-				<p style="color:red;"><?=implode('<br>', $errors);?></p>
-				<?php endif;?>			
 
 		</main>
 		<!-- Main end -->
