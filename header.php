@@ -11,26 +11,27 @@
 	</div>
 
 	<!-- MENU -->
-	<div class=" container col-sm-12 col-md-10  d-flex justify-content-center border-top border-bottom flex-wrap">
+	<div class=" container col-sm-12 col-md-10  d-flex justify-content-center border-top border-bottom ">
 
-		<div class="row col-6 d-flex justify-content-center">
-			<div class="col-sm-2 col-md-6 d-flex justify-content-center">
+		<div class="row col-6 col-sm-6 d-flex justify-content-center">
+			<div class="col-sm-6 col-md-6 d-flex justify-content-center">
 				<a class="btn border-left border-right  col-sm-10 col-md-10" href="#" role="button"> - Accueil -</a>
 			</div>	
 
 
-			<div class="col-sm-3 col-md-6 d-flex justify-content-center">
+			<div class="col-sm-6 col-md-6 d-flex justify-content-center">
 				<a class="btn border-left border-right  col-sm-3 col-md-10" href="#" role="button"> - Films du jour -</a>
 			</div>	
 		</div>
-		<div class="row col-6 d-flex justify-content-center">
-			<div class="col-sm-3 col-md-6 d-flex justify-content-center">
+
+		<div class="row col-6 col-sm-6 d-flex justify-content-center">
+			<div class="col-sm-6 col-md-6 d-flex justify-content-center">
 				<a class="btn border-left border-right  col-sm-3 col-md-10" href="#" role="button"> - Actualités -</a>
 			</div>	
 
 
 			
-			<div class="col-sm-3 col-md-6 d-flex justify-content-center">
+			<div class="col-sm-6 col-md-6 d-flex justify-content-center">
 				<a class="btn border-left border-right  col-sm-3 col-md-10" href="#" role="button"> - Contacts -</a>
 			</div>	
 		</div>
