@@ -89,7 +89,7 @@
 								echo '<td>'.$m['director'].'</td>';
 								echo '<td>'.$m['actors'].'</td>';
 								echo '<td>'.substr($m['storyline'],0,$maxLengthStoryline).(strlen($m['storyline']) > $maxLengthStoryline ? '...' : '').'</td>';
-								echo '<td><img class="photoThumb" src="../'.$m['poster_img_path'].'"</td>';
+								echo '<td><img class="photoThumb" src="../'.$m['poster_img_path'].'"></td>';
 								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_created'])).'</td>';
 								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_updated'])).'</td>';
 								
