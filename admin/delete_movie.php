@@ -12,6 +12,7 @@
 		$delete->execute();
 
 		header('Location: movie_list.php');
+		die();
 	}
 
 	//Vérifie si l'id est bien présent dans le $_GET
