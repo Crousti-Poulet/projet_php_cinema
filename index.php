@@ -5,10 +5,18 @@
 	<title>Main  Page</title>
 	<link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<<<<<<< HEAD:index.php
 	<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet"> 
+=======
+
+	<link rel="stylesheet" type="text/css" href="css/header.css">
+>>>>>>> d4ee21656aa0a110980337d1ff5ac0af6b0caa8c:index.php
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
+	<!-- ajout du header -->
+	<?php include 'header.php' ?>
 
 	<main>
 
@@ -70,7 +78,7 @@
 
 		<div class="container">
 			<div class="row art">
-				<div class="col-9 border">
+				<div class="col-lg-9 border">
 					<h5 class="article-title">titre de l'actu</h5>
 					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -79,7 +87,7 @@
 					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				</div>
-				<div class="col-3">
+				<div class="col-lg-3">
 					<img src="img/200x300.png">
 				</div>
 			</div>
@@ -136,6 +144,11 @@
 		
 	</main>
 
+
+	<!-- ajout du footer -->
+	<?php  include 'footer.php' ?>
+
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -143,6 +156,6 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
  	crossorigin="anonymous"></script>
  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="js/scripts.js" type="text/javascript"></script>
+
 </body>
 </html>
