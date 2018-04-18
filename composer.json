@@ -1,10 +1,10 @@
 {
     "require": {
         "respect/validation": "^1.1",
-<<<<<<< HEAD
+
         "intervention/image": "^2.4"
-=======
+
         "phpmailer/phpmailer": "^6.0"
->>>>>>> 39307c10baf987325f7c1f4749f7c3bcfb0b4be2
-    }
+
 }
+    }

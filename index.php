@@ -46,7 +46,7 @@
 	<main class="">
 
 		<!-- SLIDER -->
-		<h2 class="main-title mt-5 mb-2">Les films du moments!</h2>
+		<h2 class="main-title mt-5 mb-2 text-center">Les films du moments!</h2>
 
 		<div class="row justify-content-center">
 			<div id="carouselExampleIndicators" class="carousel slide col-10" data-ride="carousel">
@@ -88,23 +88,21 @@
 
 			 	</div>
 
-				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<a class="carousel-control-prev bg-dark" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon arrow-prev" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
 				</a>
-				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<a class="carousel-control-next bg-dark" href="#carouselExampleIndicators" role="button" data-slide="next">
+					<span class="carousel-control-next-icon arrow-next" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
 				</a>
 			</div>
 		</div>
-	 <pre> 
-	
-	<pre>
+
 		<!-- ACTUS -->
 
 		<div class="container">
-			<h2 class="actu-title mb-5 mt-5 ">Les actus !!</h2>
+			<h2 class="actu-title mb-5 mt-5 text-center">Les actus !!</h2>
 
 			<div class="row art">
 				<div class="col-sm-6 order-2 order-lg-1 col-md-6 col-lg-9  mt-3 border ">
