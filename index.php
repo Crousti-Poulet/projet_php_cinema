@@ -14,9 +14,9 @@
 	<!-- ajout du header -->
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="">
 
-		<h1 class="main-title">Les films du moments!</h1>
+		<h1 class="main-title mt-sm-5">Les films du moments!</h1>
 
 		<div class="row justify-content-center">
 			<div id="carouselExampleIndicators" class="carousel slide col-10" data-ride="carousel">
@@ -74,7 +74,7 @@
 
 		<div class="container">
 			<div class="row art">
-				<div class="col-lg-9 border">
+				<div class="col-lg-9 border ">
 					<h5 class="article-title">titre de l'actu</h5>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
