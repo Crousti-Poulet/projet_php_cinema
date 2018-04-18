@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
 {
     public static $files = array (
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
@@ -19,6 +20,18 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         array (
             'Respect\\Validation\\' => 19,
         ),
+        'P' => 
+        array (
+            'Psr\\Http\\Message\\' => 17,
+        ),
+        'I' => 
+        array (
+            'Intervention\\Image\\' => 19,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -29,6 +42,18 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         'Respect\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/respect/validation/library',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Intervention\\Image\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
     );
 
