@@ -4,9 +4,11 @@
 
 	require '../includes/connect.php'; // pour se connecter à la BD
 
+	$maxLengthStoryline = 110;
+
 	if (!isset($_SESSION['user']) || empty($_SESSION['user'])){ // utilisateur non connecté
 
-		header('Location: ../connexion.php');
+		header('Location: connexion.php');
 		die();
 	}
 	else // utilisateur déjà connecté
@@ -35,7 +37,17 @@
 <body>
 	
 	<header>
-
+		<nav class="container-fluid">
+			<div id="logo" class="menu-left">
+			</div>
+			<ul id="menu" class="menu-right">
+				<li class="menu-item"><a href="movie_list.php">Films</a></li>
+				<li class="menu-item"><a href="news_list.php">Actualités</a></li>
+				<li class="menu-item"><a href="users_list.php">Utilisateurs</a></li>
+				<li class="menu-item"><a href="add_user.php">Créer utilisateur</a></li>
+				<li class="menu-item"><a href="deconnexion.php">Deconnexion</a></li>
+			</ul>
+		</nav>
 	</header>
 
 	<main>
@@ -76,7 +88,7 @@
 								echo '<td>'.$m['country'].'</td>';
 								echo '<td>'.$m['director'].'</td>';
 								echo '<td>'.$m['actors'].'</td>';
-								echo '<td>'.$m['storyline'].'</td>';
+								echo '<td>'.substr($m['storyline'],0,$maxLengthStoryline).(strlen($m['storyline']) > $maxLengthStoryline ? '...' : '').'</td>';
 								echo '<td><img class="photoThumb" src="../'.$m['poster_img_path'].'"</td>';
 								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_created'])).'</td>';
 								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_updated'])).'</td>';
