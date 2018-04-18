@@ -101,6 +101,9 @@
 					$sth->bindValue(':date_created',date('c'));
 
 					$sth->execute();
+
+					header('Location: news_list.php');
+					die();
 				} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
 				else{
 					$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
