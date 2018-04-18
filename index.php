@@ -5,8 +5,12 @@
 	<title>Main  Page</title>
 	<link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<<<<<<< HEAD:index.php
+	<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet"> 
+=======
 
 	<link rel="stylesheet" type="text/css" href="css/header.css">
+>>>>>>> d4ee21656aa0a110980337d1ff5ac0af6b0caa8c:index.php
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
@@ -76,7 +80,7 @@
 			<div class="row art">
 				<div class="col-lg-9 border ">
 					<h5 class="article-title">titre de l'actu</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -94,7 +98,7 @@
 				</div>
 				<div class="col-9 border">
 					<h5 class="article-title">titre de l'actu</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -107,7 +111,7 @@
 		<div class="row art">
 				<div class="col-9 border">
 					<h5 class="article-title">titre de l'actu</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -125,7 +129,7 @@
 				</div>
 				<div class="col-9 border">
 					<h5 class="article-title">titre de l'actu</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse

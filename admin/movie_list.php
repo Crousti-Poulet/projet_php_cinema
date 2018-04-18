@@ -11,10 +11,10 @@
 	}
 	else // utilisateur déjà connecté
 	{
-
-		$res = $bdd->prepare('SELECT * FROM booking ORDER BY date_booking DESC'); 
+		// nécessaire de récuperer l'ID mais inutile de l'afficher
+		$res = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
 		$res->execute();
-		$bookings = $res->fetchAll();
+		$movies = $res->fetchAll();
 
 	}
 
@@ -25,7 +25,7 @@
 	<meta charset="utf-8">
 	<title>Réservation de restaurant</title>
 
-	<!-- Bootstrap -->
+		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	
 		<link rel="stylesheet" href="../css/style.css">
@@ -36,72 +36,56 @@
 	
 	<header>
 
-		<nav class="container-fluid">
-			<div id="logo" class="menu-left">
-				<a class="menu-logo" href="index.php">Le gras c'est la vie</a>
-			</div>
-			<ul id="menu" class="menu-right">
-				<li class="menu-item"><a href="../index.php">Accueil</a></li>
-				<li class="menu-item"><a href="reservations.php">Réservations</a></li> <!-- # = page actuelle -->
-				<li class="menu-item"><a href="new_user.php">Créer utilisateur</a></li>
-				<li class="menu-item"><a href="users.php">Utilisateurs</a></li>
-				<li class="menu-item"><a href="add_picture.php">Ajout image</a></li>
-				<li class="menu-item"><a href="add_options.php">MAJ adresse</a></li>
-				<li class="menu-item"><a href="deconnexion.php">Deconnexion</a></li>
-				<li class="menu-item menu-mobile"><a href="#"><i class="fas fa-bars"></i></a></li>
-			</ul>
-			<!-- <li class="menu-item"><a href="#"><i class="fas fa-shopping-cart"></i><div class="counter"><span class="fa-layers-counter" style="background:Tomato">1,419</span></div></a></li> -->
-		</nav>
 	</header>
 
 	<main>
 
-		<!-- section container fluid avec bandeau pour avoir 100%, reste dans container -->
-		<!-- <section id="bandeau" class="container-fluid"> -->
-			<!-- <div class="row no-gutters"> row obligatoire pour insérer des colonnes, no-gutters pour supprimer les marges horizontales -->
-				<!-- <div class="col-12"> -->
-					<!-- <img id="img_bandeau" src="img/bandeau.jpg" alt="avocat bacon egg"> -->
-					<!-- <h1>Le gras c'est la vie</h1> -->
-				<!-- </div> -->
-			<!-- </div> -->
-		<!-- </section> -->
-
-		<h2>Liste des réservations</h2>
+		<h2>Liste des films</h2>
 
 
 		<div >
 			<table class="table table-striped table-hover" id="listeResas">
 				<thead class="thead-dark">
 					<tr>
-						<th>ID</th>
-						<th>Prénom</th>
-						<th>Nom</th>
-						<th>Téléphone</th>
-						<th>Email</th>
-						<th>Date</th>
-						<th>Détail</th>
+						<th>Modifier</th>
+						<th>Supprimer</th>
+						<th>Titre</th>
+						<th>Durée</th>
+						<th>Date de sortie</th>
+						<th>Genre</th>
+						<th>Pays</th>
+						<th>Réalisateur</th>
+						<th>Acteurs</th>
+						<th>Synopsis</th>
+						<th>Affiche</th>
+						<th>Date création</th>
+						<th>Date modif.</th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						foreach($bookings as $b){
+						foreach($movies as $m){
 							echo '<tr>';
-								echo '<td>'.$b['id'].'</td>';
-								echo '<td>'.$b['firstname'].'</td>';
-								echo '<td>'.$b['lastname'].'</td>';
-								echo '<td>'.$b['phone'].'</td>';
-								echo '<td>'.$b['email'].'</td>';
-								echo '<td>'.date('d/m/Y H:i', strtotime($b['date_booking'])).'</td>';
-								echo '<td><a href="detail_reservation.php?id='.$b['id'].'"><i class="fas fa-search"></i></a></td>';
+								echo '<td><a href="update_movie.php?id='.$m['id'].'"><i class="fas fa-search"></i></a></td>';
+								echo '<td><a href="delete_movie.php?id='.$m['id'].'"><i class="fas fa-trash-alt"></i></a></td>';
+								echo '<td><b>'.$m['title'].'</b></td>';
+								echo '<td>'. floor($m['length'] / 60) .'h'. sprintf('%02d', $m['length'] % 60 ) .'</td>'; // sprintf pour afficher '2h03' au lieu de 2h3'
+								echo '<td>'.date('d/m/Y', strtotime($m['date_release'])).'</td>';
+								echo '<td>'.$m['genre'].'</td>';
+								echo '<td>'.$m['country'].'</td>';
+								echo '<td>'.$m['director'].'</td>';
+								echo '<td>'.$m['actors'].'</td>';
+								echo '<td>'.$m['storyline'].'</td>';
+								echo '<td><img class="photoThumb" src="../'.$m['poster_img_path'].'"</td>';
+								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_created'])).'</td>';
+								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_updated'])).'</td>';
+								
 							echo '</tr>';
 						}
 					?>
 				</tbody>
 			</table>
-
-
-		
-
 
 		</div>
 	</main>
