@@ -108,7 +108,7 @@ if(!empty($_POST)){
 				<div class="form-group">
 					<input type="password" id="password" name="password" placeholder="Votre mot de passe">
 				</div>
-				<button type="submit" class="btn btn-primary">Se connecter</button>
+				<button type="submit" class="btn">Se connecter</button>
 			</form>
 
 		</div>
