@@ -29,9 +29,11 @@ if(!empty($_POST)){
 		if(!empty($user)){
 			if(password_verify($post['password'], $user['password'])){
 				$_SESSION['user'] = array(
+					'id' => $user['id'],
 					'firstname' => $user['firstname'],
 					'lastname' => $user['lastname'],
-					'email' => $user['email']
+					'email' => $user['email'],
+					'role' => $user['role']
 				);
 				//rediriger vers la page accueil admin
 				header('Location: movie_list.php');
