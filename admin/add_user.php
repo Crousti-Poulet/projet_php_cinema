@@ -7,7 +7,7 @@
 
 	use Respect\Validation\Validator as v;
 
-	if (false){//(!isset($_SESSION['user']) || empty($_SESSION['user'])){ // utilisateur non connecté
+	if (!isset($_SESSION['user']) || empty($_SESSION['user'])){ // utilisateur non connecté
 
 		header('Location: connexion.php');
 		die();
@@ -167,7 +167,7 @@
 					</select>
 				</div>
 
-				<button type="submit" class="btn btn-primary">Enregistrer</button>
+				<button type="submit" class="btn">Enregistrer</button>
 
 			</form>
 		</div>
