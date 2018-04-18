@@ -27,6 +27,12 @@ main{
 	font-family: 'EB Garamond', serif;
 }
 
+<<<<<<< HEAD
+/*slider*/
+.image-slider{
+	margin: 0 auto;
+}
+=======
 .contact{
 	text-align: center;
 }
@@ -41,3 +47,4 @@ main{
 	transition: 1s;
 }
 
+>>>>>>> 39307c10baf987325f7c1f4749f7c3bcfb0b4be2
