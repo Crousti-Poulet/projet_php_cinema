@@ -14,9 +14,9 @@
 	else // utilisateur déjà connecté
 	{
 		// nécessaire de récuperer l'ID mais inutile de l'afficher
-		$res = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
-		$res->execute();
-		$movies = $res->fetchAll();
+		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
+		$sth->execute();
+		$movies = $sth->fetchAll();
 
 	}
 
@@ -25,7 +25,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Réservation de restaurant</title>
+	<title>Cinéma</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -55,8 +55,13 @@
 		<h2>Liste des films</h2>
 
 
+<<<<<<< HEAD
 		<div>
 			<table class="table table-striped table-hover" id="listeResas">
+=======
+		<div >
+			<table class="table table-striped table-hover" id="movieList">
+>>>>>>> 72bf2dc0dbf3354a04ba04a9715743f3a438d592
 				<thead class="thead-dark">
 					<tr>
 						<th>Modifier</th>

@@ -1,3 +1,28 @@
+<?php 
+	session_start();
+
+
+
+	require 'includes/connect.php'; // pour se connecter à la BD
+		/*Preparation de la requête*/ 
+		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies WHERE date_release = CURDATE() LIMIT 4');
+
+		/* Execution de la requete SQL */
+		// on effectue l'insertion
+		$sth->execute();
+
+
+		//lecture des données
+		$movies = $sth->fetchAll(PDO::FETCH_ASSOC);
+	
+
+
+
+ ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +45,8 @@
 
 	<main class="">
 
-		<h2 class="main-title mt-5 mb-5">Les films du moments!</h2>
+		<!-- SLIDER -->
+		<h2 class="main-title mt-5 mb-2">Les films du moments!</h2>
 
 		<div class="row justify-content-center">
 			<div id="carouselExampleIndicators" class="carousel slide col-10" data-ride="carousel">
@@ -30,33 +56,30 @@
 					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 					<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
 				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img class="d-block w-100" src="img/700x300.png" alt="First slide">
-						<div class="carousel-caption d-none d-md-block">
-				    		<h5>film 1</h5>
-				    		<p>petit commentaire sur le film</p>
-						</div>
+				<div class="carousel-inner ">
+					<div class="carousel-item active  text-center">
+						<img class="w-25 " src="<?php echo $movies[0]['poster_img_path']  ?>" alt="First slide">
+						
 					</div>
-
-				    <div class="carousel-item">
-				      	<img class="d-block w-100" src="img/700x300.png" alt="Second slide">
+	
+				    <div class="carousel-item text-center">
+				      	<img class="w-25 " src="<?php echo $movies[1]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>film 2</h5>
 							<p>petit commentaire sur le film</p>
 						</div>
 				    </div>
 
-				    <div class="carousel-item">
-				      	<img class="d-block w-100" src="img/700x300.png" alt="Second slide">
+				    <div class="carousel-item text-center">
+				      	<img class="w-25 " src="<?php echo $movies[2]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>film 5</h5>
 							<p>petit commentaire sur le film</p>
 						</div>
 				    </div>
 
-				    <div class="carousel-item">
-				      	<img class="d-block w-100" src="img/700x300.png" alt="Second slide">
+				    <div class="carousel-item text-center">
+				      	<img class="w-25 " src="<?php echo $movies[3]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
 							<h5>film 4</h5>
 							<p>petit commentaire sur le film</p>
@@ -75,11 +98,14 @@
 				</a>
 			</div>
 		</div>
-
-
+	 <pre> 
+	
+	<pre>
+		<!-- ACTUS -->
 
 		<div class="container">
 			<h2 class="actu-title mb-5 mt-5 ">Les actus !!</h2>
+
 			<div class="row art">
 				<div class="col-sm-6 order-2 order-lg-1 col-md-6 col-lg-9  mt-3 border ">
 					<h5 class="article-title">titre de l'actu</h5>
