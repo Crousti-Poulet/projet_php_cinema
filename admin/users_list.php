@@ -14,9 +14,9 @@
 	else // utilisateur déjà connecté
 	{
 		// nécessaire de récuperer l'ID mais inutile de l'afficher
-		$res = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
+		$res = $bdd->prepare('SELECT id, firstname, lastname, email, password, role, date_created, date_updated FROM users ORDER BY date_created DESC'); 
 		$res->execute();
-		$movies = $res->fetchAll();
+		$users = $res->fetchAll();
 
 	}
 
@@ -25,7 +25,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Réservation de restaurant</title>
+	<title>liste utilisateur</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -61,37 +61,26 @@
 					<tr>
 						<th>Modifier</th>
 						<th>Supprimer</th>
-						<th>Titre</th>
-						<th>Durée</th>
-						<th>Date de sortie</th>
-						<th>Genre</th>
-						<th>Pays</th>
-						<th>Réalisateur</th>
-						<th>Acteurs</th>
-						<th>Synopsis</th>
-						<th>Affiche</th>
-						<th>Date création</th>
-						<th>Date modif.</th>
-						
+						<th>Prénom</th>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>role</th>
+						<th>date de création</th>
+						<th>date de modification</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						foreach($movies as $m){
+						foreach($users as $user){
 							echo '<tr>';
-								echo '<td><a href="update_movie.php?id='.$m['id'].'"><i class="fas fa-search"></i></a></td>';
-								echo '<td><a href="delete_movie.php?id='.$m['id'].'"><i class="fas fa-trash-alt"></i></a></td>';
-								echo '<td><b>'.$m['title'].'</b></td>';
-								echo '<td>'. floor($m['length'] / 60) .'h'. sprintf('%02d', $m['length'] % 60 ) .'</td>'; // sprintf pour afficher '2h03' au lieu de 2h3'
-								echo '<td>'.date('d/m/Y', strtotime($m['date_release'])).'</td>';
-								echo '<td>'.$m['genre'].'</td>';
-								echo '<td>'.$m['country'].'</td>';
-								echo '<td>'.$m['director'].'</td>';
-								echo '<td>'.$m['actors'].'</td>';
-								echo '<td>'.substr($m['storyline'],0,$maxLengthStoryline).(strlen($m['storyline']) > $maxLengthStoryline ? '...' : '').'</td>';
-								echo '<td><img class="photoThumb" src="../'.$m['poster_img_path'].'"</td>';
-								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_created'])).'</td>';
-								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_updated'])).'</td>';
+								echo '<td><a href="update_user.php?id='.$user['id'].'"><i class="fas fa-search"></i></a></td>';
+								echo '<td><a href="delete_user.php?id='.$user['id'].'"><i class="fas fa-trash-alt"></i></a></td>';
+								echo '<td><b>'.$user['firstname'].'</b></td>';
+								echo '<td>'.$user['lastname'].'</td>';
+								echo '<td>'.$user['email'].'</td>';
+								echo '<td>'.$user['role'].'</td>';
+								echo '<td>'.date('d/m/Y H:i', strtotime($user['date_created'])).'</td>';
+								echo '<td>'.date('d/m/Y H:i', strtotime($user['date_updated'])).'</td>';
 								
 							echo '</tr>';
 						}
