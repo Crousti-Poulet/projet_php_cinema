@@ -21,7 +21,7 @@ if(!empty($_POST)){
 
 	if(count($errors) === 0){	
 
-		$res = $bdd->prepare('SELECT firstname, lastname, email, password, role FROM users WHERE email = :email LIMIT 1');
+		$res = $bdd->prepare('SELECT id, firstname, lastname, email, password, role FROM users WHERE email = :email LIMIT 1');
 		$res->bindValue(':email', $_POST['email']);
 		$res->execute();
 		$user = $res->fetch(); 
