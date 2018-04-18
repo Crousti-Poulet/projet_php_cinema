@@ -22,6 +22,7 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         ),
         'P' => 
         array (
+<<<<<<< HEAD
             'Psr\\Http\\Message\\' => 17,
         ),
         'I' => 
@@ -31,6 +32,9 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
+=======
+            'PHPMailer\\PHPMailer\\' => 20,
+>>>>>>> 39307c10baf987325f7c1f4749f7c3bcfb0b4be2
         ),
     );
 
@@ -43,6 +47,7 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         array (
             0 => __DIR__ . '/..' . '/respect/validation/library',
         ),
+<<<<<<< HEAD
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -54,6 +59,11 @@ class ComposerStaticInit8073ed4e9eb879dea031c18cd4dc8ad5
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+=======
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+>>>>>>> 39307c10baf987325f7c1f4749f7c3bcfb0b4be2
         ),
     );
 
