@@ -1,32 +1,34 @@
 <?php 
 
-session_start();
+	session_start();
 
-//Afin de pouvoir utiliser Respect/Validation
-require '../vendor/autoload.php';
+	//Afin de pouvoir utiliser Respect/Validation
+	require '../vendor/autoload.php';
 
-//Afin de pouvoir utiliser l'élément v de Respect/Validation
-use Respect\Validation\Validator as v;
+	//Afin de pouvoir utiliser l'élément v de Respect/Validation
+	use Respect\Validation\Validator as v;
 
-require '../includes/connect.php'; // On inclut le fichier "connect" servant à se connecter à la base de données.
+	require '../includes/connect.php'; // On inclut le fichier "connect" servant à se connecter à la base de données.
 
-$errors = [];
-$post = [];
-$date = date('Y-m-d');
-$hour = date('H');
-$minutes = date('i');
-$seconds = date('s');
+	$maxLength = 1500; // durée maximum autorisée en minutes
 
-//Vérifier que l'image a bien été uploadé
-if(!empty($_FILES['picture'])){
+	$errors = [];
+	$post = [];
+	$date = date('Y-m-d');
+	$hour = date('H');
+	$minutes = date('i');
+	$seconds = date('s');
 
-	$finfo = new finfo();
+	//Vérifier que l'image a bien été uploadé
+	if(!empty($_FILES['picture'])){
 
-	$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
+		$finfo = new finfo();
 
-	$mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+		$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
 
-	if(in_array($mimeType, $mimeTypeAllow)){
+		$mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+
+		if(in_array($mimeType, $mimeTypeAllow)){
 
 			$dirUpload = '../uploads/';
 			$search = [' ', 'é', 'è', 'à', 'ù'];
@@ -37,70 +39,70 @@ if(!empty($_FILES['picture'])){
 			move_uploaded_file($_FILES['picture']['tmp_name'], $monImgUpload);
 		}
 
-	//Vérification du contenu du $_POST
-	if(!empty($_POST)){
+		//Vérification du contenu du $_POST
+		if(!empty($_POST)){
 
-		var_dump($_POST['genre']);
+			var_dump($_POST['genre']);
 
-		foreach($_POST as $key => $value){
-			$post[$key] = trim(strip_tags($value));
-		}
-	
-		
-		if(!v::stringType()->length(1, 20)->validate($post['title'])) {
-			$errors[] = 'Titre invalide (doit être compris entre 1 et 20 caractères)';
-
-		}if(!v::stringType()->length(0, 255)->validate($post['actors'])) {
-			$errors[] = 'Titre invalide (doit comporter au maximum 255 caractères)';
-		}
-
-		if(!v::stringType()->length(1, 30)->validate($post['director'])) {
-			$errors[] = 'Nom du réalisateur invalide (doit être compris entre 1 et 30 caractères)';
-		}
-
-		}if(!v::stringType()->length(1, 3)->validate($post['length']) && is_numeric($post['length'])) {
-			$errors[] = 'Durée invalide (le nombre de minute doit comporter entre 1 et 3 chiffres)';
-		}
-
-		if(!v::stringType()->length(50, 1000)->validate($post['storyline'])) {
-			$errors[] = 'Synopsis invalide (doit être compris entre 50 et 1000 caractères)';
-		}
-
-		if(!v::stringType()->length(4, 20)->validate($post['country'])) {
-			$errors[] = 'Pays invalide (doit être compris entre 4 et 20 caractères)';
-		}
-
-		if(count($errors) === 0){
-
-			var_dump($post['genre']);
-
-				$formValid = true;
-				
-				//Variable donnant la date et l'heure
-				// $upload_date = $date.' '.$hour.':'.$minutes.':'.$seconds;
-
-				$link = $dirUpload.$newFileName;
-				//Stockage des informations après validation du formulaire.
-
-				$sth = $bdd->prepare('INSERT INTO movies (title, date_release, actors, director, length, country, genre, storyline, link) VALUES(:title, :date_release, :actors, :director, :length, :country, :genre, :storyline, :link)');
-
-				$sth->bindValue(':title', $post['title']);
-				$sth->bindValue(':date_release', $post['date_release']);
-				$sth->bindValue(':actors', $post['actors']);
-				$sth->bindValue(':director', $post['director']);
-				$sth->bindValue(':length', $post['length']);
-				$sth->bindValue(':country', $post['country']);
-				$sth->bindValue(':genre', $post['genre']);
-				$sth->bindValue(':storyline', $post['storyline']);
-				$sth->bindValue(':link',$link);
-
-				$sth->execute();
-			}
-			else {
-				$formValid = false;
+			foreach($_POST as $key => $value){
+				$post[$key] = trim(strip_tags($value));
 			}
 		
-}
+			
+			if(!v::stringType()->length(1, 20)->validate($post['title'])) {
+				$errors[] = 'Titre invalide (doit être compris entre 1 et 20 caractères)';
+
+			}if(!v::stringType()->length(0, 255)->validate($post['actors'])) {
+				$errors[] = 'Liste d\'acteurs invalide (doit comporter au maximum 255 caractères)';
+			}
+
+			if(!v::stringType()->length(1, 30)->validate($post['director'])) {
+				$errors[] = 'Nom du réalisateur invalide (doit être compris entre 1 et 30 caractères)';
+			}
+
+			}if(!v::intVal()->max($maxLength)->validate($post['length']) ) {
+				$errors[] = 'La durée doit être un entier inférieur à '.$maxLength;
+			}
+
+			if(!v::stringType()->length(50, 1000)->validate($post['storyline'])) {
+				$errors[] = 'Synopsis invalide (doit être compris entre 50 et 1000 caractères)';
+			}
+
+			if(!v::stringType()->length(4, 20)->validate($post['country'])) {
+				$errors[] = 'Pays invalide (doit être compris entre 4 et 20 caractères)';
+			}
+
+			if(count($errors) === 0){
+
+				var_dump($post['genre']);
+
+					$formValid = true;
+					
+					//Variable donnant la date et l'heure
+					// $upload_date = $date.' '.$hour.':'.$minutes.':'.$seconds;
+
+					$pathname = $dirUpload.$newFileName;
+					//Stockage des informations après validation du formulaire.
+
+					$sth = $bdd->prepare('INSERT INTO movies (title, date_release, actors, director, length, country, genre, storyline, poster_img_path) VALUES(:title, :date_release, :actors, :director, :length, :country, :genre, :storyline, :pathname)');
+
+					$sth->bindValue(':title', $post['title']);
+					$sth->bindValue(':date_release', $post['date_release']);
+					$sth->bindValue(':actors', $post['actors']);
+					$sth->bindValue(':director', $post['director']);
+					$sth->bindValue(':length', $post['length']);
+					$sth->bindValue(':country', $post['country']);
+					$sth->bindValue(':genre', $post['genre']);
+					$sth->bindValue(':storyline', $post['storyline']);
+					$sth->bindValue(':pathname',$pathname);
+
+					$sth->execute();
+				}
+				else {
+					$formValid = false;
+				}
+			
+	}
  ?>
 
 <!DOCTYPE html>
