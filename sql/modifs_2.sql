@@ -1,0 +1,1 @@
+ALTER TABLE `movies` ADD `length` SMALLINT NOT NULL AFTER `title`;
