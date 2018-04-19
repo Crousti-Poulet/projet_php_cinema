@@ -26,7 +26,7 @@
 		</div>
 		<div class="row col-6 d-flex justify-content-center">
 			<div class="col-sm-3 col-md-6 d-flex justify-content-center">
-				<a class="btn border-left border-right  col-sm-3 col-md-10" href="#" role="button"> - Actualités -</a>
+				<a class="btn border-left border-right  col-sm-3 col-md-10" href="list-news(f).php" role="button"> - Actualités -</a>
 			</div>	
 
 
