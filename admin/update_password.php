@@ -40,11 +40,6 @@
 				$maxPassword = 16;
 				
 
-				 echo '<pre> $post :<br>';
-				 var_dump($post);
-				 echo '<br> $_POST :<br>';
-				 var_dump($_POST);
-				 echo '</pre>';
 
 				if(!empty($_POST)){ 
 				//nettoyage des données saisies
