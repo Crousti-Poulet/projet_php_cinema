@@ -13,7 +13,7 @@
 	
 	<?php include 'navbar.php' ?>
 
-	<main>
+	<main class="container">
 
 		<h2>Pages admin</h2>
 

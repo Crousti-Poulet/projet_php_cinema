@@ -70,7 +70,7 @@ if(!empty($_POST)){
 	
 	<?php include 'navbar.php' ?>
 
-	<main>
+	<main class="container">
 
 		<h2>Connexion admin</h2>
 

@@ -30,7 +30,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>liste utilisateur</title>
+	<title>Liste des utilisateurs</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -45,7 +45,7 @@
 
 	<main>
 
-		<h2>Liste des films</h2>
+		<h2>Liste des utilisateurs</h2>
 
 
 		<div>
@@ -57,9 +57,9 @@
 						<th>Prénom</th>
 						<th>Nom</th>
 						<th>Email</th>
-						<th>role</th>
-						<th>date de création</th>
-						<th>date de modification</th>
+						<th>Role</th>
+						<th>Date création</th>
+						<th>Date modif.</th>
 					</tr>
 				</thead>
 				<tbody>

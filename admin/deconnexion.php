@@ -27,7 +27,7 @@
 	
 	<?php include 'navbar.php' ?>
 
-	<main>
+	<main class="container">
 
 		<h2>Deconnexion admin</h2>
 

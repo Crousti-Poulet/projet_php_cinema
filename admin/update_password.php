@@ -116,7 +116,7 @@
 	<?php include 'navbar.php' ?>
 	 
  				
-	<main>
+	<main class="container">
 
 		<h2 class="text-center">Modification du mot de passe</h2>
 

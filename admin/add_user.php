@@ -116,7 +116,7 @@
 	
 	<?php include 'navbar.php' ?>
 
-	<main>
+	<main class="container">
 
 		<h2>Création utilisateur</h2>
 
