@@ -1,5 +1,6 @@
 <?php 
-session_start();
+
+	session_start();
 
 	require '../includes/connect.php'; // pour se connecter à la BD
 	require '../vendor/autoload.php'; // permet de charger toutes les dépendances de composer
@@ -14,76 +15,83 @@ session_start();
 	else // utilisateur déjà connecté
 	{
 		//securité supplémentaire
-		if(isset($_GET['id']) && is_numeric($_GET['id'])){
+		if(isset($_SESSION['user']['id']) && is_numeric($_SESSION['user']['id'])){
 
-		// recupere un utilisateur par rapport a son id
-		// $sth = $bdd->prepare('SELECT * FROM  user WHERE id=5'); // meliode statique
-			$sth = $bdd->prepare('SELECT * FROM  users WHERE id= :data_id');//meliode dynamique
-			$sth->bindValue(':data_id' , $_GET['id'], PDO::PARAM_INT); //Recupere la valeur de ?id=X dans l'url et sécurise en INT 
+			$idUser =  $_SESSION['user']['id'];
+			// recupere un utilisateur par rapport a son id
+			// $sth = $bdd->prepare('SELECT * FROM  user WHERE id=5'); // meliode statique
+			$sth = $bdd->prepare('SELECT id, firstname, lastname, email, password, role, date_created, date_updated FROM users WHERE id = :idUser');//meliode dynamique
+			$sth->bindValue(':idUser' , $idUser, PDO::PARAM_INT); //Recupere la valeur de ?id=X dans l'url et sécurise en INT 
 
-		/* Execution de la requete SQL */
-			// on effectue l'insertion
+			//Execution de la requete SQL
 			$sth->execute();
 
-			//lecture des données
-			$user = $sth->fetch(PDO::FETCH_ASSOC);
+			//récupération des données
+			$user = $sth->fetch();
+
+			// on autorise la mise à jour d'un utilisateur seulement s'il existe
+			if (isset($user) && !empty($user)){
 
 
+				// verification
+				$errors = []; // Contiendra les erreurs
+				$post = []; // Contiendra mes données nettoyées (sans espace, ni balise html / php)
+				$minPassword = 8;
+				$maxPassword = 16;
+				
 
-			// verification
-			$errors = []; // Contiendra les erreurs
-			$post = []; // Contiendra mes données nettoyées (sans espace, ni balise html / php)
-			$minPassword = 8;
-			$maxPassword = 16;
-			
-
-				 echo '<pre>';
+				 echo '<pre> $post :<br>';
 				 var_dump($post);
+				 echo '<br> $_POST :<br>';
 				 var_dump($_POST);
 				 echo '</pre>';
-			if(!empty($_POST)){ 
-			//nettoyage des données saisies
-				// trim() retire les espaces en début et fin de chaine
-				// strip_tags() retire les balises html & php. /!\ Important pour la sécurité
-				foreach($_POST as $key => $value){
-					// $post[$key] = $value permet de préserver l'association clé / valeur
-					$post[$key] = trim(strip_tags($value));
-				}
 
-
-			// On effectue nos vérifications
-			
-				if(!v::stringType()->length($minPassword,$maxPassword)->validate($post['password'])){
-						$errors[] = 'Le mot de passe doit contenir entre '.$minPassword.' et '.$maxPassword.' caractères';
+				if(!empty($_POST)){ 
+				//nettoyage des données saisies
+					// trim() retire les espaces en début et fin de chaine
+					// strip_tags() retire les balises html & php. /!\ Important pour la sécurité
+					foreach($_POST as $key => $value){
+						// $post[$key] = $value permet de préserver l'association clé / valeur
+						$post[$key] = trim(strip_tags($value));
 					}
-				
-				if(count($errors) === 0){
-					
-					$formValid = true;
 
-					/*Preparation de l'update*/
 
-					//mon formulaire est valide ( pas d'erreur ) , je stock les informations saisies en base de donnée
-					// on ne specifie pas l'ID car il est en AUTO INCREMENT et donc prendra sa valeur n umérique automatiquement
-					$sth = $bdd->prepare('UPDATE users SET password = :new_password  WHERE id = :data_id ');
-					
-					$sth->bindValue(':new_password' , password_hash($post['password'], PASSWORD_DEFAULT), PDO::PARAM_STR); 
-					
-					/* Execution de la requete SQL */
-					// on effectue l'insertion
-					$sth->execute();	
-				}
+				// On effectue nos vérifications
 				
-				else {
+					if(!v::stringType()->length($minPassword,$maxPassword)->validate($post['password'])){
+							$errors[] = 'Le mot de passe doit contenir entre '.$minPassword.' et '.$maxPassword.' caractères';
+						}
 					
-					$formValid = false;
-				}
-				echo '<pre>';
-				 var_dump($post['password']);
-				 echo '</pre>';
-			}
-		}
-	}
+					if(count($errors) === 0){
+						
+						$formValid = true;
+
+						/*Preparation de l'update*/
+
+						//mon formulaire est valide ( pas d'erreur ) , je stock les informations saisies en base de donnée
+						// on ne specifie pas l'ID car il est en AUTO INCREMENT et donc prendra sa valeur n umérique automatiquement
+						$sth = $bdd->prepare('UPDATE users SET password = :new_password  WHERE id = :idUser ');
+						
+						$sth->bindValue(':new_password' , password_hash($post['password'], PASSWORD_DEFAULT), PDO::PARAM_STR); 
+						$sth->bindValue(':idUser' , $idUser, PDO::PARAM_INT);
+						
+						/* Execution de la requete SQL */
+						// on effectue l'insertion
+						$success = $sth->execute();	
+					}
+					
+					else {
+						
+						$formValid = false;
+					}
+					echo '<pre>';
+					 var_dump($post['password']);
+					 echo '</pre>';
+
+				} // fin if(!empty($_POST))
+			} // fin if (isset($user) && !empty($user))
+		} // fin du if (!isset($_SESSION['user']) || empty($_SESSION['user']))
+	} // fin du else du if (!isset($_SESSION['user']) || empty($_SESSION['user']))
 ?>
 
 
@@ -112,36 +120,48 @@ session_start();
 
 		<h2 class="text-center">Modification du mot de passe</h2>
 
+		<?php 
+			// afficher le formulaire seulement si utilisateur trouvé
+			if (isset($user) && !empty($user)):
+		 ?>
 
-		<!-- affichage du message de confirmation ou des erreurs -->
-		<?php if(isset($formValid) && $formValid == true):?>
+			<!-- affichage du message de confirmation ou des erreurs -->
+			<?php if(isset($formValid) && $formValid == true && $success):?>
 
-		<p style="color:green;">Mot de passe modifié avec succès !</p>
-	
-		<?php elseif(isset($formValid) && $formValid == false):?>
-	
-		<p style="color:red;">
-			<?=implode('<br>', $errors);?>
-		</p>
-		<?php endif;?>
+				<p style="color:green;">Mot de passe modifié avec succès !</p>
+		
+			<?php elseif(isset($formValid) && $formValid == true && !$success):?>
+		
+				<p style="color:red;">Erreur, mot de passe non modifié</p>
+		
+			<?php elseif(isset($formValid) && $formValid == false):?>
+		
+				<p style="color:red;">
+					<?=implode('<br>', $errors);?>
+				</p>
+			<?php endif;?>
 		
 
 
-		<p class="text-center text-danger"> tu es sur le point de modifié ton mot de passe !</p>
-		<div class="d-flex justify-content-center">
+			<p class="text-center text-danger"> Vous êtes sur le point de modifier votre mot de passe !</p>
+			<div class="d-flex justify-content-center">
 			
-			<form  class="col-sm-8 col-md-6 d-flex justify-content-center "method="post" id="formUser">
-								
-				<div class="form-group col-4 text-center">
-					<input type="password" class="form-control" name="password" id="password" placeholder=" Nouveau Mot de passe" value="<?php echo isset($_POST['password']) ? $_POST['password'] : '' ?>">
-				</div>
-				
-				
-				<!-- bouton valider -->
-				<div class="d-flex justify-content-center col-2 ">
-					<button type="submit" class="btn btn-success col-12" >modifié</button>
-				</div>
-			</form>
+				<form  class="col-sm-8 col-md-6 d-flex justify-content-center "method="post" id="formUser">
+									
+					<div class="form-group col-4 text-center">
+						<input type="password" class="form-control" name="password" id="password" placeholder=" Nouveau Mot de passe" value="<?php echo isset($_POST['password']) ? $_POST['password'] : '' ?>">
+					</div>
+					
+					<!-- bouton valider -->
+					<div class="d-flex justify-content-center col-2 ">
+						<button type="submit" class="btn btn-success col-12" >Enregistrer</button>
+					</div>
+				</form>
+			</div>
+		<?php 
+				else: echo '<p style="color:red;">Cet utilisateur n\'existe pas !</p>';
+			?>
+		<?php endif ?>
 
 	</main>
 
