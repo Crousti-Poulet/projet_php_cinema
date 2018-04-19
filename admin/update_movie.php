@@ -79,7 +79,7 @@
 
 					//écraser l'image seulement s'il y en a une nouvelle'
 					if(){
-							XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX TO DO
+							//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX TO DO
 					}
 
 					//Vérifier que l'image a bien été uploadée

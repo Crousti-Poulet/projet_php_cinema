@@ -40,7 +40,7 @@
 
 	<main>
 
-		<h2>Liste des films</h2>
+		<h2>Liste des articles</h2>
 
 
 		<div>
@@ -66,7 +66,7 @@
 								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td>'.$new['user_id'].'</td>';
 								echo '<td>'.$new['content'].'</td>';
-								echo '<td><img src="'.$new['img_path'].'"></td>';
+								echo '<td><img src="../'.$new['img_path'].'"></td>';
 								echo '<td>'.date('d/m/Y H:i', strtotime($new['date_created'])).'</td>';
 								echo '<td>'.date('d/m/Y H:i', strtotime($new['date_updated'])).'</td>';
 								
