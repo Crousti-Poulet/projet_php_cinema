@@ -40,7 +40,7 @@
 
 	<main>
 
-		<h2>Liste des actualité</h2>
+		<h2>Liste des actualités</h2>
 
 
 		<div>

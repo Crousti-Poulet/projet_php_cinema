@@ -28,7 +28,19 @@ main{
 }
 
 
-/*slider*/
+/*top 4*/
+
+#topmovie{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+
+#topmovie a:hover{
+	transform: scale(1.2);
+	transition: 0.5s;
+}
 
 /*form*/
 .contact{

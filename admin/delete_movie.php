@@ -57,6 +57,8 @@
 		<title>Confirmation de suppression</title>
 	</head>
 	<body>
+
+		<?php include 'navbar.php' ?>
 			
 		<!--Main start-->
 		<main class="container">

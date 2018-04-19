@@ -139,7 +139,7 @@
 			
 		<main class="container" id="main_bloc">
 			
-			<h2>Ajouter un actualité</h2>
+			<h2>Ajouter une actualité</h2>
 				
 			<!-- Affichage des messages d'erreur ou de confirmation -->
 			<?php if(isset($formValid) && $formValid == true):?>
