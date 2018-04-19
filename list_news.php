@@ -15,7 +15,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>liste des news</title>
+	<title>Liste des actualités</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -31,7 +31,7 @@
 
 	<main>
 
-		<h2>Liste des articles</h2>
+		<h2>Liste des actualités</h2>
 
 
 		<div>
@@ -42,8 +42,8 @@
 						<th>Auteur</th>
 						<th>Contenu</th>
 						<th>Image</th>
-						<th>date de création</th>
-						<th>date de modification</th>
+						<th>Date création</th>
+						<th>Date modif.</th>
 					</tr>
 				</thead>
 				<tbody>
