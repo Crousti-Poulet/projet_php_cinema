@@ -4,27 +4,41 @@
 
 	require '../includes/connect.php'; // On inclut le fichier "connect" servant à se connecter à la base de données.
 
-	//Vérifie que l'utilisateur a bien cliqué sur le boutton "Supprimer"
-	if(!empty($_POST['submit'])) {
+	if (!isset($_SESSION['user']) || empty($_SESSION['user'])){ // utilisateur non connecté
 
-	    $delete = $bdd->prepare('DELETE FROM movies WHERE id = :id');
-	    $delete->bindValue(':id', $_POST['movieId'], PDO::PARAM_INT); 
-		$delete->execute();
-
-		header('Location: movie_list.php');
+		header('Location: connexion.php');
 		die();
 	}
+	// vérifier que l'utilisateur a le droit d'accéder à cette page : Admin = OK, Editeur = KO
+	elseif ($_SESSION['user']['role']!='Admin') {
+		header('Location: private.php');
+		die();
+	}
+	else // utilisateur déjà connecté
+	{
 
-	//Vérifie si l'id est bien présent dans le $_GET
-	if(!empty($_GET['id'])) {
+		//Vérifie que l'utilisateur a bien cliqué sur le boutton "Supprimer"
+		if(!empty($_POST['submit'])) {
 
-		$sth = $bdd->prepare('SELECT * FROM movies WHERE id = :id');
-		
-		$sth->bindValue(':id', $_GET['id'], PDO::PARAM_INT); 
+		    $delete = $bdd->prepare('DELETE FROM movies WHERE id = :id');
+		    $delete->bindValue(':id', $_POST['movieId'], PDO::PARAM_INT); 
+			$delete->execute();
 
-		$sth->execute();
+			header('Location: movie_list.php');
+			die();
+		}
 
-		$movie = $sth->fetch(PDO::FETCH_ASSOC);
+		//Vérifie si l'id est bien présent dans le $_GET
+		if(!empty($_GET['id'])) {
+
+			$sth = $bdd->prepare('SELECT * FROM movies WHERE id = :id');
+			
+			$sth->bindValue(':id', $_GET['id'], PDO::PARAM_INT); 
+
+			$sth->execute();
+
+			$movie = $sth->fetch(PDO::FETCH_ASSOC);
+		}
 	}
 
  ?>

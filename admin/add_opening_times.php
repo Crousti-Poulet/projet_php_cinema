@@ -15,6 +15,11 @@
 		header('Location: connexion.php');
 		die();
 	}
+	// vérifier que l'utilisateur a le droit d'accéder à cette page : Admin = OK, Editeur = KO
+	elseif ($_SESSION['user']['role']!='Admin') {
+		header('Location: private.php');
+		die();
+	}
 	else // utilisateur déjà connecté
 	{
 		
