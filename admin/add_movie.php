@@ -7,6 +7,8 @@
 
 	//Afin de pouvoir utiliser l'élément v de Respect/Validation
 	use Respect\Validation\Validator as v;
+	use Intervention\Image\ImageManagerStatic as Image;
+
 
 	require '../includes/connect.php'; // On inclut le fichier "connect" servant à se connecter à la base de données.
 
@@ -90,8 +92,11 @@
 
 				$formValid = true;
 
-				//enregistrer l'image
-				$newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
+				// enregistrer l'image :
+				// modification du nom de l'image
+				 $newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
+				// read image from temporary file
+				$img = Image::make($_FILES['picture']['tmp_name']);
 
 				// créer le répertoire s'il n'existe pas
 				if(!is_dir($dirUpload)){
@@ -100,7 +105,10 @@
 
 				$pathname = $dirUpload.$newFileName;
 
-				if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
+				// save image
+				$img->save($pathname);
+
+				// if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
 					
 					$formValid = true;
 
@@ -119,10 +127,10 @@
 					$sth->bindValue(':pathname',substr($pathname,3));
 
 					$sth->execute();
-				} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
-				else{
-					$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
-				}
+				// } // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
+				// else{
+				// 	$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
+				// }
 				
 			} // fin du if(count($errors) === 0)
 			else {
@@ -150,19 +158,7 @@
 	</head>
 	<body>
 
-	<header>
-		<nav class="container-fluid">
-			<div id="logo" class="menu-left">
-			</div>
-			<ul id="menu" class="menu-right">
-				<li class="menu-item"><a href="movie_list.php">Films</a></li>
-				<li class="menu-item"><a href="news_list.php">Actualités</a></li>
-				<li class="menu-item"><a href="users_list.php">Utilisateurs</a></li>
-				<li class="menu-item"><a href="add_user.php">Créer utilisateur</a></li>
-				<li class="menu-item"><a href="deconnexion.php">Deconnexion</a></li>
-			</ul>
-		</nav>
-	</header>
+	<?php include 'navbar.php' ?>
 			
 		<main class="container" id="main_bloc">
 			
@@ -249,5 +245,14 @@
 			</div>
 
 		</main>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script  src="http://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+ 	crossorigin="anonymous"></script>
+ 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 	
 	</body>
 </html>

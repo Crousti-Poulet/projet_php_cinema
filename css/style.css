@@ -45,4 +45,9 @@ main{
 	transition: 1s;
 }
 
+h2{
+	text-align: center;
+	text-decoration: underline;
+}
+
 
