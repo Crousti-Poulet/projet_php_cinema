@@ -54,7 +54,7 @@ if(!empty($_POST)){
 
 		
 		$mail->setFrom('contact@monresto.fr');//addresse de l'expediteur
-		$mail->addAddress('contact@monresto.fr');
+		$mail->addAddress($post['email']);//adress de destinataire
 
 		$mail->Subject = 'Mot de pass oublié ';//sujet du message
 		$content_mail = '<a href="http://localhost/php/projet_php_cinema/admin/reset_password.php?email=' . $post['email'] . '&token=' . $token.'"> Modifier mon mot de passe </a>';
