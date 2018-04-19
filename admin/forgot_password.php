@@ -54,11 +54,11 @@ if(!empty($_POST)){
 
 		
 		$mail->setFrom('contact@monresto.fr');//addresse de l'expediteur
-		$mail->addAddress('contact@monresto.fr');
+		$mail->addAddress($post['email']);//adress de destinataire
 
 		$mail->Subject = 'Mot de pass oublié ';//sujet du message
-		$content_mail = '<a href="http://localhost/php/GitHub/projet_php_cinema/admin/reset_password.php?email=' . $post['email'] . '&token=' . $token.'"> Modifier mon mot de passe </a>';
-		var_dump($content_mail);
+		$content_mail = '<a href="http://localhost/php/projet_php_cinema/admin/reset_password.php?email=' . $post['email'] . '&token=' . $token.'"> Modifier mon mot de passe </a>';
+		var_dump('cliquez sur le liens suivants pour modifier votre mot de passe : ' . $content_mail);
 		$mail->msgHTML($content_mail);//message en lui même, la fonction 'nl2br' permet d'enregistrer les retour à la ligne dans le message et de les convertir au format html afin de les conser
 
 		if (!$mail->send()){
@@ -97,11 +97,13 @@ if(!empty($_POST)){
 		<!-- affichage du message de confirmation ou des erreurs -->
 		<?php if(isset($formValid) && $formValid == true):?>
 
-		<p style="color:green;">mail envoyé avec succès !</p>
+		<p style="color:green; text-align: center">mail envoyé avec succès !</p>
+
+
 	
 		<?php elseif(isset($formValid) && $formValid == false):?>
 	
-		<p style="color:red;">
+		<p style="color:red; text-align: center">
 			<?=implode('<br>', $errors);?>
 		</p>
 		<?php endif;?>
@@ -114,7 +116,7 @@ if(!empty($_POST)){
 					<input type="email" class="form-control col-3" name="email" id="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
 				</div>
 				<div class="d-flex justify-content-center">
-					<button type="submit" class="btn">Recevoir mon nouveau mot de passe</button>
+					<button type="submit" class="btn">Recevoir</button>
 				</div>
 			</form>
 		</div>
