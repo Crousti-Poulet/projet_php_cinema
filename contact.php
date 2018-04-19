@@ -4,6 +4,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
+require 'includes/connect.php';
 
 $post = [];
 $error = [];
@@ -72,6 +73,12 @@ if (!empty($_POST)) {
 
 }
 
+$res = $bdd->prepare('SELECT id, day, times FROM opening_times'); 
+$res->execute();
+$days = $res->fetchAll();
+
+
+
  ?>
 
 
@@ -132,6 +139,17 @@ if (!empty($_POST)) {
 
 	 		</fieldset>
 	 	</form>
+		
+		<h3 class="horraire">Jours et heures d'ouverture</h3>
+
+		<ul class="horraires list-unstyled">
+
+			<?php foreach ($days as $day) {
+				echo '<li>'.$day['day'].' : '.$day['times'].'</li>';
+			} ?>
+
+		</ul>
+
 	</main>
 
 
