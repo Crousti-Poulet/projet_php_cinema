@@ -1,10 +1,7 @@
 <?php
 
-	session_start();
 
 	require 'includes/connect.php'; // pour se connecter à la BD
-
-	$maxLengthStoryline = 110;
 
 
 		// nécessaire de récuperer l'ID mais inutile de l'afficher
