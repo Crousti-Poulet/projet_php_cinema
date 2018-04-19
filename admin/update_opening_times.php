@@ -31,9 +31,6 @@
 			$res->execute();
 			$opening_day = $res->fetchAll(); 
 
-			var_dump($opening_day[0]);
-
-
 			if (isset($opening_day) && !empty($opening_day)){
 
 				$errors = [];

@@ -57,9 +57,16 @@ main{
 	transition: 1s;
 }
 
-h2{
+h2, .horraire{
 	text-align: center;
 	text-decoration: underline;
 }
 
+
+/* horraires d'ouvertures */
+
+.horraires, .horraire{
+	text-align: center;
+	margin-top: 20px;
+}
 
