@@ -1,7 +1,5 @@
 <?php
 
-	session_start();
-
 	require 'includes/connect.php'; // pour se connecter à la BD
 
 	$maxLengthStoryline = 110;
