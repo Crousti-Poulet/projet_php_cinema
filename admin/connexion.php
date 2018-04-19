@@ -70,27 +70,27 @@ if(!empty($_POST)){
 	
 	<?php include 'navbar.php' ?>
 
-	<main class="container">
+	<main class="container display">
 
 		<h2>Connexion admin</h2>
 
 		<?php 
 			if(isset($formError) && $formError){
-				echo '<p class="error">'.implode('<br>', $err).'</p>';
+				echo '<p class="error text-center">'.implode('<br>', $err).'</p>';
 			}
 			if(isset($errorLogin) && $errorLogin){
-				echo '<p class="error">Erreur d\'adresse email ou de mot de passe</p>';
+				echo '<p class="error text-center">Erreur d\'adresse email ou de mot de passe</p>';
 			}
 
 			if(isset($_SESSION['user']['firstname']) && isset($_SESSION['user']['email']) && isset($_SESSION['user']['lastname'])){
-				echo '<p class="success">Bonjour '.$_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname'];
+				echo '<p class="success text-center">Bonjour '.$_SESSION['user']['firstname'].' '.$_SESSION['user']['lastname'];
 				echo '<br>Vous êtes déjà connecté.</p>';
 			}
 		?>
 
-		<div >
+		<div class="d-flex justify-content-center">
 
-			<form method="post" id="formConnexion">
+			<form method="post" class="d-flex justify-content-center flex-column" id="formConnexion">
 				<div class="form-group">
 					<input type="email" id="email" name="email" placeholder="votre@email.fr">
 				</div>
@@ -98,7 +98,11 @@ if(!empty($_POST)){
 				<div class="form-group">
 					<input type="password" id="password" name="password" placeholder="Votre mot de passe">
 				</div>
-				<button type="submit" class="btn">Se connecter</button>
+				
+				<a href="forgot_password.php" class="text-center">Mot de passe oublié ?</a>
+				<a href="deconnexion.php" class="text-center">Se deconnecter</a>
+
+				<button type="submit" class="btn text-center">Se connecter</button>
 			</form>
 
 		</div>
