@@ -40,6 +40,7 @@
 
 				$errors = [];
 				$post = [];
+				$imgUpdated = false; // savoir si l'utilisateur a choisi une nouvelle image
 				$date = date('Y-m-d');
 				$hour = date('H');
 				$minutes = date('i');
@@ -77,54 +78,69 @@
 						$errors[] = 'Le pays doit comporter entre 2 et 20 caractères)';
 					}
 
-					//écraser l'image seulement s'il y en a une nouvelle'
-					if(){
-							//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX TO DO
-					}
 
-					//Vérifier que l'image a bien été uploadée
-					if (empty($_FILES['picture'])){
-						$errors[] = 'Erreur inexpliquée sur l\'image!';
-					}
-					if ($_FILES['picture']['error']==4 ){
-						$errors[] = 'Vous n\'avez pas selectionné d\'image !';
-					}
-					elseif (empty($_FILES['picture']) || $_FILES['picture']['error']!=0 ){
-						$errors[] = 'Erreur sur l\'envoi de l\'image !';
-					}
-					
-					else{
+					// vérifications sur l'image seulement s'il y en a une nouvelle (non obligatoire pour la modification du film)
+					if (!empty($_FILES['picture'])){
 
-						//vérification du mime type du fichier uploadé
-						$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
+						// si image selectionnée
+						if ($_FILES['picture']['error']!=4 ){
 
-						if (!in_array($mimeType, $mimeTypeAllow)) {
-							$errors[] = 'Type de fichier non autorisé !';
+							if ($_FILES['picture']['error']!=0 && $_FILES['picture']['error']!=4 ){
+								$errors[] = 'Erreur sur l\'envoi de l\'image !';
+							}
+							else{
+								// pas d'erreur sur l'image
+								//vérification du mime type du fichier uploadé
+								$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
+
+								if (!in_array($mimeType, $mimeTypeAllow)) {
+									$errors[] = 'Type de fichier non autorisé !';
+								}
+								else{
+									$imgUpdated = true;
+								}
+							}
 						}
 					}
-						
+
 					if(count($errors) === 0){
 
 						$formValid = true;
 
-						//enregistrer l'image
-						$newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
 
-						// créer le répertoire s'il n'existe pas
-						if(!is_dir($dirUpload)){
-							mkdir($dirUpload,0755);
+						if($imgUpdated) // image modifiée
+						{
+							//enregistrer l'image
+							$newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
+
+							// créer le répertoire s'il n'existe pas
+							if(!is_dir($dirUpload)){
+								mkdir($dirUpload,0755);
+							}
+
+							$pathname = $dirUpload.$newFileName;
+
+							if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
+								$formValid = true;
+							} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
+							else{
+								$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
+								$formValid = false;
+							}
 						}
 
-						$pathname = $dirUpload.$newFileName;
-
-						if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
+						if($formValid){ // pas d'image ou image uploadée avec succès
 							
-							$formValid = true;
+							//ecriture de la requete en fonction des champs à enregistrer
+							$strReq = 'UPDATE movies set title = :title, date_release = :date_release, actors = :actors, director = :director, length = :length, country = :country, genre = :genre, storyline = :storyline, date_updated=now()';
+							if ($imgUpdated){
+								$strReq .= ', poster_img_path = :pathname';
+							}
+							$strReq .= ' WHERE id=:idMovie';
 
-							// image uploadée avec succès, on enregistre la fiche dans la base
+							$sth = $bdd->prepare($strReq);
 
-							$sth = $bdd->prepare('UPDATE movies set title = :title, date_release = :date_release, actors = :actors, director = :director, length = :length, country = :country, genre = :genre, storyline = :storyline, poster_img_path = :pathname, date_updated=now()');
-
+							$sth->bindValue(':idMovie', $idMovie, PDO::PARAM_INT);
 							$sth->bindValue(':title', $post['title']);
 							$sth->bindValue(':date_release', $post['date_release']);
 							$sth->bindValue(':actors', $post['actors']);
@@ -133,14 +149,13 @@
 							$sth->bindValue(':country', $post['country']);
 							$sth->bindValue(':genre', $post['genre']);
 							$sth->bindValue(':storyline', $post['storyline']);
-							$sth->bindValue(':pathname',substr($pathname,3));
+							if ($imgUpdated){
+								$sth->bindValue(':pathname',substr($pathname,3));
+							}
 
 							$success = $sth->execute();
-
-						} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
-						else{
-							$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
 						}
+						
 						
 					} // fin du if(count($errors) === 0)
 					else {
@@ -209,28 +224,13 @@
 					</div>
 
 					<div class="form-group">
-						<label for="date_release">Date de sortie :</label>
-						<input class="form-control" type="date" name="date_release" id="date_release" value="<?php echo isset($movie['date_release']) ? $movie['date_release'] : '' ?>" >
-					</div>
-
-					<div class="form-group">
-						<label for="actors">Acteurs :</label>
-						<input class="form-control" type="text" name="actors" id="actors" value="<?php echo isset($movie['actors']) ? $movie['actors'] : '' ?>" >
-					</div>
-
-					<div class="form-group">
-						<label for="director">Réalisateur :</label>
-						<input class="form-control" type="text" name="director" id="director" value="<?php echo isset($movie['director']) ? $movie['director'] : '' ?>" >
-					</div>
-
-					<div class="form-group">
 						<label for="length">Durée (en minutes) :</label>
 						<input class="form-control" type="text" name="length" id="length" value="<?php echo isset($movie['length']) ? $movie['length'] : '' ?>" >
 					</div>
 
 					<div class="form-group">
-						<label for="country">Pays :</label>
-						<input class="form-control" type="text" name="country" id="country" value="<?php echo isset($movie['country']) ? $movie['country'] : '' ?>" >
+						<label for="date_release">Date de sortie :</label>
+						<input class="form-control" type="date" name="date_release" id="date_release" value="<?php echo isset($movie['date_release']) ? $movie['date_release'] : '' ?>" >
 					</div>
 
 					<div class="form-group">	
@@ -253,6 +253,21 @@
 							<option <?php if (isset($movie['genre']) && $movie['genre']=="Comédie d'action") echo 'selected'; ?> value="Comédie d'action">Comédie d'action</option>
 							<option <?php if (isset($movie['genre']) && $movie['genre']=="Superhero") echo 'selected'; ?> value="Superhero">Superhero</option>
 						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="country">Pays :</label>
+						<input class="form-control" type="text" name="country" id="country" value="<?php echo isset($movie['country']) ? $movie['country'] : '' ?>" >
+					</div>
+
+					<div class="form-group">
+						<label for="director">Réalisateur :</label>
+						<input class="form-control" type="text" name="director" id="director" value="<?php echo isset($movie['director']) ? $movie['director'] : '' ?>" >
+					</div>	
+
+					<div class="form-group">
+						<label for="actors">Acteurs :</label>
+						<input class="form-control" type="text" name="actors" id="actors" value="<?php echo isset($movie['actors']) ? $movie['actors'] : '' ?>" >
 					</div>
 
 					<div class="form-group">
