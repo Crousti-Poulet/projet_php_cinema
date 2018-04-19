@@ -55,13 +55,13 @@
 		<h2>Liste des films</h2>
 
 
-<<<<<<< HEAD
+
 		<div>
 			<table class="table table-striped table-hover" id="listeResas">
-=======
+
 		<div >
 			<table class="table table-striped table-hover" id="movieList">
->>>>>>> 72bf2dc0dbf3354a04ba04a9715743f3a438d592
+
 				<thead class="thead-dark">
 					<tr>
 						<th>Modifier</th>

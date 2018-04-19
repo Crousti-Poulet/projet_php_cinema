@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
     "content-hash": "5e0ad40628080043aca25629e5084662",
     "packages": [
         {
@@ -259,7 +259,7 @@
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "time": "2018-03-27T13:49:45+00:00"
->>>>>>> 39307c10baf987325f7c1f4749f7c3bcfb0b4be2
+
         },
         {
             "name": "respect/validation",

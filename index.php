@@ -16,8 +16,6 @@
 		$movies = $sth->fetchAll(PDO::FETCH_ASSOC);
 	
 
-
-
  ?>
 
 
@@ -46,7 +44,7 @@
 	<main class="">
 
 		<!-- SLIDER -->
-		<h2 class="main-title mt-5 mb-2">Les films du moments!</h2>
+		<h2 class="main-title mt-5 mb-2 text-center">Les films du moments!</h2>
 
 		<div class="row justify-content-center">
 			<div id="carouselExampleIndicators" class="carousel slide col-10" data-ride="carousel">
@@ -65,46 +63,39 @@
 				    <div class="carousel-item text-center">
 				      	<img class="w-25 " src="<?php echo $movies[1]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
-							<h5>film 2</h5>
-							<p>petit commentaire sur le film</p>
-						</div>
-				    </div>
+							
+					</div>
 
 				    <div class="carousel-item text-center">
 				      	<img class="w-25 " src="<?php echo $movies[2]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
-							<h5>film 5</h5>
-							<p>petit commentaire sur le film</p>
-						</div>
-				    </div>
+							
+					</div>
 
 				    <div class="carousel-item text-center">
 				      	<img class="w-25 " src="<?php echo $movies[3]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
-							<h5>film 4</h5>
-							<p>petit commentaire sur le film</p>
-						</div>
-				    </div>
+							
+					</div>
 
 			 	</div>
 
-				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
+				<a class="carousel-control-prev border rounded" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <img src="img/left.png" aria-hidden="true">
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next border rounded" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    
+                    <img src="img/right.png" aria-hidden="true">
+                    <span class="sr-only">Next</span>
+                </a>
 			</div>
 		</div>
-	 <pre> 
-	
-	<pre>
+
 		<!-- ACTUS -->
 
 		<div class="container">
-			<h2 class="actu-title mb-5 mt-5 ">Les actus !!</h2>
+			<h2 class="actu-title mb-5 mt-5 text-center">Les actus !!</h2>
 
 			<div class="row art">
 				<div class="col-sm-6 order-2 order-lg-1 col-md-6 col-lg-9  mt-3 border ">
