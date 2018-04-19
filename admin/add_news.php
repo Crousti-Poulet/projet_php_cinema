@@ -131,7 +131,7 @@
 		<!-- fonts start -->
 		<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 		<!-- fonts end -->
-		<title>Ajouter un artcile</title>
+		<title>Ajouter un article</title>
 	</head>
 	<body>
 

@@ -16,8 +16,6 @@
 		$movies = $sth->fetchAll(PDO::FETCH_ASSOC);
 	
 
-
-
  ?>
 
 
@@ -65,37 +63,32 @@
 				    <div class="carousel-item text-center">
 				      	<img class="w-25 " src="<?php echo $movies[1]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
-							<h5>film 2</h5>
-							<p>petit commentaire sur le film</p>
-						</div>
-				    </div>
+							
+					</div>
 
 				    <div class="carousel-item text-center">
 				      	<img class="w-25 " src="<?php echo $movies[2]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
-							<h5>film 5</h5>
-							<p>petit commentaire sur le film</p>
-						</div>
-				    </div>
+							
+					</div>
 
 				    <div class="carousel-item text-center">
 				      	<img class="w-25 " src="<?php echo $movies[3]['poster_img_path']  ?>" alt="Second slide">
 						<div class="carousel-caption d-none d-md-block">
-							<h5>film 4</h5>
-							<p>petit commentaire sur le film</p>
-						</div>
-				    </div>
+							
+					</div>
 
 			 	</div>
 
-				<a class="carousel-control-prev bg-dark" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					<span class="carousel-control-prev-icon arrow-prev" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="carousel-control-next bg-dark" href="#carouselExampleIndicators" role="button" data-slide="next">
-					<span class="carousel-control-next-icon arrow-next" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
+				<a class="carousel-control-prev border rounded" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <img src="img/left.png" aria-hidden="true">
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next border rounded" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    
+                    <img src="img/right.png" aria-hidden="true">
+                    <span class="sr-only">Next</span>
+                </a>
 			</div>
 		</div>
 
