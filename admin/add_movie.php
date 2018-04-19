@@ -213,7 +213,7 @@
 
 					<div class="form-group">	
 						<label for="genre">Genre :</label>
-						<select class="form-control" name="genre" id="genre value="<?php echo isset($_POST['genre']) ? $_POST['genre'] : '' ?>">
+						<select class="form-control" name="genre" id="genre" value="<?php echo isset($_POST['genre']) ? $_POST['genre'] : '' ?>">
 							<!-- <option value="select">-Sélectionner-</option> -->
 							<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Comédie") echo 'selected'; ?> value="Comédie">Comédie</option>
 							<option <?php if (isset($_POST['genre']) && $_POST['genre']=="Science-fiction") echo 'selected'; ?> value="Science-fiction">Science-fiction</option>
