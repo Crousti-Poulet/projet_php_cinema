@@ -13,17 +13,26 @@
 				<li class="nav-item">
 					<a class="nav-link" href="movie_list.php">Films</a>
 				</li>
-
+				<li class="nav-item">
+					<a class="nav-link" href="add_movie.php">Ajouter film</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="news_list.php">Actualités</a>
 				</li>
-
+				<li class="nav-item">
+					<a class="nav-link" href="add_news.php">Ajouter actualité</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="list_opening_times.php">Horaires du cinéma</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="add_opening_times.php">Ajouter horaire</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="users_list.php">Utilisateurs</a>
 				</li>
-
 				<li class="nav-item">
-					<a class="nav-link" href="add_user.php">Créer utilisateur</a>
+					<a class="nav-link" href="add_user.php">Ajouter utilisateur</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="deconnexion.php">Deconnexion</a>
