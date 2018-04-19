@@ -23,7 +23,7 @@
 					<a class="nav-link" href="add_news.php">Ajouter actualité</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="list_opening_times.php">Horaires du cinéma</a>
+					<a class="nav-link" href="opening_times_list.php">Horaires du cinéma</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="add_opening_times.php">Ajouter horaire</a>
