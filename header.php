@@ -21,7 +21,7 @@
 
 
 			<div class="col-sm-3 col-md-6 d-flex justify-content-center">
-				<a class="btn border-left border-right  col-sm-3 col-md-10" href="#" role="button"> - Films du jour -</a>
+				<a class="btn border-left border-right  col-sm-3 col-md-10" href="list-movies(f).php" role="button"> - Films du jour -</a>
 			</div>	
 		</div>
 		<div class="row col-6 d-flex justify-content-center">

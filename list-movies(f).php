@@ -8,9 +8,9 @@
 
 
 		// nécessaire de récuperer l'ID mais inutile de l'afficher
-		$res = $bdd->prepare('SELECT id, title, user_id, content, img_path, date_created, date_updated FROM news ORDER BY date_created DESC'); 
-		$res->execute();
-		$news = $res->fetchAll();
+		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
+		$sth->execute();
+		$movies = $sth->fetchAll();
 
 
 ?>
@@ -18,15 +18,19 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>liste des news</title>
+	<title>Cinéma</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<!-- les lien pour les css-->
+		<!--lien vers les fiches de styles-->
 		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css">
-		<!--lien pour les fonts-->
+		<link rel="stylesheet" href="css/header.css">
+
+		<!--font google-->
 		<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+		
+
 </head>
 <body>
 	
@@ -34,31 +38,47 @@
 
 	<main>
 
-		<h2>Liste des articles</h2>
+		<h2>Films du jour</h2>
+
 
 
 		<div>
 			<table class="table table-striped table-hover" id="listeResas">
+
+		<div >
+			<table class="table table-striped table-hover" id="movieList">
+
 				<thead class="thead-dark">
 					<tr>
 						<th>Titre</th>
-						<th>Auteur</th>
-						<th>Contenu</th>
-						<th>Image</th>
-						<th>date de création</th>
-						<th>date de modification</th>
+						<th>Durée</th>
+						<th>Date de sortie</th>
+						<th>Genre</th>
+						<th>Pays</th>
+						<th>Réalisateur</th>
+						<th>Acteurs</th>
+						<th>Synopsis</th>
+						<th>Affiche</th>
+						<th>Date création</th>
+						<th>Date modif.</th>
+						
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-						foreach($news as $new){
+						foreach($movies as $m){
 							echo '<tr>';
-								echo '<td><b>'.$new['title'].'</b></td>';
-								echo '<td>'.$new['user_id'].'</td>';
-								echo '<td>'.$new['content'].'</td>';
-								echo '<td><img src="'.$new['img_path'].'"></td>';
-								echo '<td>'.date('d/m/Y H:i', strtotime($new['date_created'])).'</td>';
-								echo '<td>'.date('d/m/Y H:i', strtotime($new['date_updated'])).'</td>';
+								echo '<td><b>'.$m['title'].'</b></td>';
+								echo '<td>'. floor($m['length'] / 60) .'h'. sprintf('%02d', $m['length'] % 60 ) .'</td>'; // sprintf pour afficher '2h03' au lieu de 2h3'
+								echo '<td>'.date('d/m/Y', strtotime($m['date_release'])).'</td>';
+								echo '<td>'.$m['genre'].'</td>';
+								echo '<td>'.$m['country'].'</td>';
+								echo '<td>'.$m['director'].'</td>';
+								echo '<td>'.$m['actors'].'</td>';
+								echo '<td>'.substr($m['storyline'],0,$maxLengthStoryline).(strlen($m['storyline']) > $maxLengthStoryline ? '...' : '').'</td>';
+								echo '<td><img class="photoThumb" src="'.$m['poster_img_path'].'"></td>';
+								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_created'])).'</td>';
+								echo '<td>'.date('d/m/Y H:i', strtotime($m['date_updated'])).'</td>';
 								
 							echo '</tr>';
 						}
@@ -69,7 +89,7 @@
 		</div>
 	</main>
 
-	<?php include 'footer.php' ?>
+		<?php include 'footer.php' ?>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -82,4 +102,3 @@
 
 </body>
 </html>
-
