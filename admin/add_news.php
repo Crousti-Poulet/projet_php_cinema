@@ -46,7 +46,7 @@
 			}
 
 			if(!v::stringType()->length(50, null)->validate($post['content'])) {
-				$errors[] = 'Le contenu de l\'artcile doit comporter au moins 50 caractères)';
+				$errors[] = 'Le contenu de l\'actualité doit comporter au moins 50 caractères)';
 			}
 
 			//Vérifier que l'image a bien été uploadée
@@ -131,7 +131,7 @@
 		<!-- fonts start -->
 		<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 		<!-- fonts end -->
-		<title>Ajouter un article</title>
+		<title>Ajouter une actualité</title>
 	</head>
 	<body>
   
@@ -139,12 +139,12 @@
 			
 		<main class="container" id="main_bloc">
 			
-			<h2>Ajouter un artcile</h2>
+			<h2>Ajouter un actualité</h2>
 				
 			<!-- Affichage des messages d'erreur ou de confirmation -->
 			<?php if(isset($formValid) && $formValid == true):?>
 
-			<p style="color:green;">La fiche de l'article a bien été enregistrée</p>
+			<p style="color:green;">La fiche de l'actualité a bien été enregistrée</p>
 		
 			<?php elseif(isset($formValid) && $formValid == false):?>
 			

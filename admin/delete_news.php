@@ -4,29 +4,37 @@
 
 	require '../includes/connect.php'; // On inclut le fichier "connect" servant à se connecter à la base de données.
 
-	//Vérifie que l'utilisateur a bien cliqué sur le boutton "Supprimer"
-	if(!empty($_POST['submit'])) {
+	if (!isset($_SESSION['user']) || empty($_SESSION['user'])){ // utilisateur non connecté
 
-		var_dump($_POST);
-
-	    $delete = $bdd->prepare('DELETE FROM news WHERE id = :id');
-	    $delete->bindValue(':id', $_POST['articleId'], PDO::PARAM_INT); 
-		$delete->execute();
-
-		header('Location: news_list.php');
+		header('Location: connexion.php');
 		die();
 	}
+	else // utilisateur déjà connecté
+	{
+		//Vérifie que l'utilisateur a bien cliqué sur le boutton "Supprimer"
+		if(!empty($_POST['submit'])) {
 
-	//Vérifie si l'id est bien présent dans le $_GET
-	if(!empty($_GET['id'])) {
+			var_dump($_POST);
 
-		$sth = $bdd->prepare('SELECT * FROM news WHERE id = :id');
-		
-		$sth->bindValue(':id', $_GET['id'], PDO::PARAM_INT); 
+		    $delete = $bdd->prepare('DELETE FROM news WHERE id = :id');
+		    $delete->bindValue(':id', $_POST['articleId'], PDO::PARAM_INT); 
+			$delete->execute();
 
-		$sth->execute();
+			header('Location: news_list.php');
+			die();
+		}
 
-		$article = $sth->fetch(PDO::FETCH_ASSOC);
+		//Vérifie si l'id est bien présent dans le $_GET
+		if(!empty($_GET['id'])) {
+
+			$sth = $bdd->prepare('SELECT * FROM news WHERE id = :id');
+			
+			$sth->bindValue(':id', $_GET['id'], PDO::PARAM_INT); 
+
+			$sth->execute();
+
+			$article = $sth->fetch(PDO::FETCH_ASSOC);
+		}
 	}
 
  ?>
@@ -49,7 +57,7 @@
 		<!--Main start-->
 		<main class="container">
 				
-			<h1>Voulez-vous vraiment supprimer l'article "<?php if(isset($article['title']) && !empty($article['title'])) {echo $article['title'];}else{echo '?';} ?>" ?</h1>
+			<h1>Voulez-vous vraiment supprimer l'actualité "<?php if(isset($article['title']) && !empty($article['title'])) {echo $article['title'];}else{echo '?';} ?>" ?</h1>
 			
 			<form method="POST">
 				
