@@ -41,8 +41,6 @@
 			<table class="table table-striped table-hover" id="listeResas">
 				<thead class="thead-dark">
 					<tr>
-						<th>Modifier article</th>
-						<th>Supprimer un article</th>
 						<th>Titre</th>
 						<th>Auteur</th>
 						<th>Contenu</th>
@@ -55,8 +53,6 @@
 					<?php
 						foreach($news as $new){
 							echo '<tr>';
-								echo '<td><a href="update_news.php?id='.$new['id'].'"><i class="fas fa-search"></i></a></td>';
-								echo '<td><a href="delete_news.php?id='.$new['id'].'"><i class="fas fa-trash-alt"></i></a></td>';
 								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td>'.$new['user_id'].'</td>';
 								echo '<td>'.$new['content'].'</td>';
