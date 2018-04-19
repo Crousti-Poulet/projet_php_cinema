@@ -1,11 +1,11 @@
 <?php 
-	session_start();
+
 
 
 
 	require 'includes/connect.php'; // pour se connecter à la BD
 		/*Preparation de la requête*/ 
-		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies WHERE date_release = CURDATE() LIMIT 4');
+		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC');
 
 		/* Execution de la requete SQL */
 		// on effectue l'insertion
@@ -14,6 +14,12 @@
 
 		//lecture des données
 		$movies = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+
+		// nécessaire de récuperer l'ID mais inutile de l'afficher
+		$res = $bdd->prepare('SELECT id, title, user_id, content, img_path, date_created, date_updated FROM news ORDER BY date_created DESC LIMIT 4'); 
+		$res->execute();
+		$news = $res->fetchAll();
 	
 
  ?>
@@ -41,127 +47,40 @@
 	<!-- ajout du header -->
 	<?php include 'header.php' ?>
 
-	<main class="">
+	<main>
 
-		<!-- SLIDER -->
+		<!--les 4 film de la première page-->
 		<h2 class="main-title mt-5 mb-2 text-center">Les films du moments!</h2>
 
-		<div class="row justify-content-center">
-			<div id="carouselExampleIndicators" class="carousel slide col-10" data-ride="carousel">
-				<ol class="carousel-indicators">
-					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-				</ol>
-				<div class="carousel-inner ">
-					<div class="carousel-item active  text-center">
-						<img class="w-25 " src="<?php echo $movies[0]['poster_img_path']  ?>" alt="First slide">
-						
-					</div>
-	
-				    <div class="carousel-item text-center">
-				      	<img class="w-25 " src="<?php echo $movies[1]['poster_img_path']  ?>" alt="Second slide">
-						<div class="carousel-caption d-none d-md-block">
-							
-					</div>
-
-				    <div class="carousel-item text-center">
-				      	<img class="w-25 " src="<?php echo $movies[2]['poster_img_path']  ?>" alt="Second slide">
-						<div class="carousel-caption d-none d-md-block">
-							
-					</div>
-
-				    <div class="carousel-item text-center">
-				      	<img class="w-25 " src="<?php echo $movies[3]['poster_img_path']  ?>" alt="Second slide">
-						<div class="carousel-caption d-none d-md-block">
-							
-					</div>
-
-			 	</div>
-
-				<a class="carousel-control-prev border rounded" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <img src="img/left.png" aria-hidden="true">
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next border rounded" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    
-                    <img src="img/right.png" aria-hidden="true">
-                    <span class="sr-only">Next</span>
-                </a>
-			</div>
+		<div id="topmovie">
+			<?php foreach ($movies as $movie) {
+				echo '<a href=""><img src="'.$movie['poster_img_path'].'"></a>';
+		} ?>
 		</div>
+
+
 
 		<!-- ACTUS -->
 
 		<div class="container">
 			<h2 class="actu-title mb-5 mt-5 text-center">Les actus !!</h2>
+			<?php 
+			foreach ($news as $new) {
+				
+			
+				 echo '<div class="row art">';
+					echo '<div class="col-sm-6 order-2 order-lg-1 col-md-6 col-lg-9  mt-3 border ">';
+						echo '<h5 class="article-title">'.$new['title'].'</h5>';
+						echo '<p class="article-p">'.$new['content'].'</p>';
+					echo'</div>';
+					echo'<div class="col-sm-6 order-1 order-lg-2 col-md-6 col-lg-3 d-flex justify-content-center">';
+						echo '<img src="'.$new['img_path'].'">';
+				echo '</div>';
+				echo '</div>';
+			}?>
 
-			<div class="row art">
-				<div class="col-sm-6 order-2 order-lg-1 col-md-6 col-lg-9  mt-3 border ">
-					<h5 class="article-title">titre de l'actu</h5>
-					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-				<div class="col-sm-6 order-1 order-lg-2 col-md-6 col-lg-3 d-flex justify-content-center">
-					<img src="img/200x300.png">
-				</div>
-			</div>
-
-			<div class="row art">
-				<div class="col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center">
-					<img src="img/200x300.png">
-				</div>
-				<div class="col-sm-6  col-md-6 col-lg-9  mt-3 border "">
-					<h5 class="article-title">titre de l'actu</h5>
-					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
-
-
-		<div class="row art">
-				<div class="col-sm-6 order-2 order-lg-1 col-md-6 col-lg-9  mt-3 border "">
-					<h5 class="article-title">titre de l'actu</h5>
-					<p class="col-sm-12 article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-				<div class="col-sm-6 order-1 order-lg-2 col-md-6 col-lg-3 d-flex justify-content-center">
-					<img src="img/200x300.png">
-				</div>
-			</div>
-
-			<div class="row art">
-				<div class="col-sm-6  col-md-6 col-lg-3 d-flex justify-content-center">
-					<img src="img/200x300.png">				
-				</div>
-				<div class="col-sm-6  col-md-6 col-lg-9 mt-3 border "">
-					<h5 class="article-title">titre de l'actu</h5>
-					<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
-			</div>
 		</div>
 
-
-
-		
 	</main>
 
 
