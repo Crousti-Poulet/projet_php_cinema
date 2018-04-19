@@ -19,21 +19,21 @@
 	{
 
 		if (isset($_GET['id']) && is_numeric($_GET['id'])){
-			$idNew =  $_GET['id'];
-			//récuperer les informations du film en question
-			$res = $bdd->prepare('SELECT id, title, user_id, content, img_path, date_created, date_updated FROM news WHERE id = :idNew'); 
-			$res->bindValue(':idNew', $idNew, PDO::PARAM_INT);
+			$idNews =  $_GET['id'];
+			//récuperer les informations de l'actualité en question
+			$res = $bdd->prepare('SELECT id, title, user_id, content, img_path, date_created, date_updated FROM news WHERE id = :idNews'); 
+			$res->bindValue(':idNews', $idNews, PDO::PARAM_INT);
 			$res->execute();
-			$new = $res->fetch(); 
+			$news = $res->fetch(); 
 
-			// on autorise la mise à jour d'un film seulement s'il existe
-			if (isset($new) && !empty($new)){
+			// on autorise la mise à jour de l'actualité seulement si elle existe
+			if (isset($news) && !empty($news)){
 
 				// instanciation de la classe finfo
 				$finfo = new finfo();
 
 				$mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
-				$dirUpload = '../uploads/'; // répertoire de stockage des affiches de films
+				$dirUpload = '../uploads/'; // répertoire de stockage des images des actualités
 				$search = [' ', 'é', 'è', 'à', 'ù'];
 				$replace = ['-', 'e', 'e', 'a', 'u'];
 
@@ -58,8 +58,8 @@
 						$errors[] = 'Le titre doit comporter entre 1 et 255 caractères)';
 					}
 
-					if(!v::stringType()->length(50, 1000)->validate($post['content'])) {
-						$errors[] = 'Le synopsis doit comporter entre 50 et 1000 caractères)';
+					if(!v::stringType()->length(50, null)->validate($post['content'])) {
+						$errors[] = 'Le contenu de l\'actualité doit comporter au moins 50 caractères)';
 					}
 
 					// vérifications sur l'image seulement s'il y en a une nouvelle (non obligatoire pour la modification du film)
@@ -115,15 +115,15 @@
 						if($formValid){ // pas d'image ou image uploadée avec succès
 							
 							//ecriture de la requete en fonction des champs à enregistrer
-							$strReq = 'UPDATE news set id = :id, title = :title, content = :content, date_updated=now()';
+							$strReq = 'UPDATE news set title = :title, content = :content, date_updated=now()';
 							if ($imgUpdated){
-								$strReq .= ', poster_img_path = :pathname';
+								$strReq .= ', img_path = :pathname';
 							}
-							$strReq .= ' WHERE id=:idMovie';
+							$strReq .= ' WHERE id=:id';
 
 							$sth = $bdd->prepare($strReq);
 
-							$sth->bindValue(':id', $id, PDO::PARAM_INT);
+							$sth->bindValue(':id', $idNews, PDO::PARAM_INT);
 							$sth->bindValue(':title', $post['title']);
 							$sth->bindValue(':content', $post['content']);
 							if ($imgUpdated){
@@ -131,6 +131,14 @@
 							}
 
 							$success = $sth->execute();
+
+							// afficher les nouvelles valeurs dans les champs du formulaire
+							if($success){
+								$res = $bdd->prepare('SELECT id, title, user_id, content, img_path, date_created, date_updated FROM news WHERE id = :idNews'); 
+								$res->bindValue(':idNews', $idNews, PDO::PARAM_INT);
+								$res->execute();
+								$news = $res->fetch(); 
+							}
 						}
 						
 						
@@ -159,7 +167,7 @@
 			<!-- fonts start -->
 			<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 			<!-- fonts end -->
-			<title>Modifier une fiche de film</title>
+			<title>Modifier une actualité</title>
 	</head>
 	<body>
 
@@ -169,40 +177,56 @@
 
 			<h2>Modification d'une actualité</h2>
 
-			<?php if(isset($formValid) && $formValid == true):?>
+			<?php 
+				// afficher le formulaire seulement si actualité trouvée
+				if (isset($news) && !empty($news)):
+			 ?>
 
-			<p style="color:green;">La fiche du film a bien été enregistrée</p>
+			<!-- affichage du message de confirmation ou des erreurs -->
+			<?php if(isset($formValid) && $formValid == true && $success):?>
+
+			<p style="color:green;">Actualité modifiée avec succès !</p>
+		
+			<?php elseif(isset($formValid) && $formValid == true && !$success):?>
+		
+			<p style="color:red;">Erreur, actualité non modifiée</p>
 		
 			<?php elseif(isset($formValid) && $formValid == false):?>
-			
-			<p style="color:red;"><?=implode('<br>', $errors);?></p>
+		
+			<p style="color:red;">
+				<?=implode('<br>', $errors);?>
+			</p>
 			<?php endif;?>
 
 
 				<div>
-					<form class="mx-auto" method="POST" id="formNewMovie" enctype="multipart/form-data">
+					<form class="mx-auto" method="POST" id="formUpdateNews" enctype="multipart/form-data">
 						
 						<div class="form-group">
 							<label for="title">Titre :</label>
-							<input class="form-control" type="text" name="title" id="title" value="<?php if (isset($post['title'])){echo $post['title'];} ?>" >
+							<input class="form-control" type="text" name="title" id="title" value="<?php if (isset($news['title'])){echo $news['title'];} ?>" >
 						</div>
 				
 						<div class="form-group">
 							<label for="content">Contenu :</label>
-							<textarea class="form-control" name="content" id="content" rows="6"><?php if (isset($post['content'])){echo $post['content'];} ?></textarea>
+							<textarea class="form-control" name="content" id="content" rows="6"><?php if (isset($news['content'])){echo $news['content'];} ?></textarea>
 						</div>
 						
 						<div class="form-group">
-							<label for="picture">Image :</label>
-							<input class="form-control" type="file" name="picture" id="picture">
-						</div>
+						<label for="picture">Image :</label>
+							<?php echo '<td><img class="photoThumb" src="../'.$news['img_path'].'">'; ?>
+						<input class="form-control" type="file" name="picture" id="picture">
+					</div>
 				
 						<button type="submit" class="btn">Valider</button>
 				
 					</form>
 				</div>
 
-
+			<?php 
+				else: echo '<p style="color:red;">Cette actualité n\'existe pas !</p>';
+			?>
+			<?php endif ?>
 				
 		</main>
 
