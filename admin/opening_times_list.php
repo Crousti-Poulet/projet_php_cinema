@@ -46,7 +46,7 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>Modifier</th>
-						<th>Supprimer</th>
+						<!-- <th>Supprimer</th> -->
 						<th>Jour</th>
 						<th>Horaire</th>
 					</tr>
@@ -56,7 +56,7 @@
 						foreach($open_times as $open_time){
 							echo '<tr>';
 								echo '<td><a href="update_opening_times.php?day='.$open_time['day'].'"><i class="fas fa-search"></i></a></td>';
-								echo '<td><a href="delete_opening_times.php?day='.$open_time['day'].'"><i class="fas fa-trash-alt"></i></a></td>';
+								// echo '<td><a href="delete_opening_times.php?day='.$open_time['day'].'"><i class="fas fa-trash-alt"></i></a></td>';
 								echo '<td><b>'.$open_time['day'].'</b></td>';
 								echo '<td>'.$open_time['times'].'</td>';								
 							echo '</tr>';
