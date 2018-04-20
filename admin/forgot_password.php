@@ -24,47 +24,54 @@ if(!empty($_POST)){
 	if(count($errors) === 0){
 		$formValid = true;
 
-		$sth = $bdd->prepare('INSERT INTO reset_password (email, token) VALUES (:data_email, :data_token)');
+		//vérifier si l'adresse mail correspond à un compte utilisateur
+		$req = $bdd->prepare('SELECT email FROM users WHERE email = :email');//meliode dynamique
+		$req->bindValue(':email' , $post['email']);
+		$req->execute();
+		$email = $req->fetch();
 
+		// envoyer le mail seulement si l'utilisateur existe
+		if (isset($email) && !empty($email)){
+
+			$sth = $bdd->prepare('INSERT INTO reset_password (email, token) VALUES (:data_email, :data_token)');
+
+			
+			$sth->bindValue(':data_email',$post['email']);
+			$sth->bindValue(':data_token',$token );
+			$sth->execute();
 		
-		$sth->bindValue(':data_email',$post['email']);
-		$sth->bindValue(':data_token',$token );
-		$sth->execute();
-	
 
-	// envoi du mail
-
-	//placer ici l'envoie du mail
-
-			//crée une nouvelle instance de php mailer
-		$mail = new PHPMailer;
+				//crée une nouvelle instance de php mailer
+			$mail = new PHPMailer;
 
 
-		// dire à php mailer d'utiliser SMTP (qui est un protocole d'envoie de mail)
-		$mail->isSMTP();
-		//indique l'hote du serveur mail
-		$mail->Host = 'smtp.mailtrap.io';
+			// dire à php mailer d'utiliser SMTP (qui est un protocole d'envoie de mail)
+			$mail->isSMTP();
+			//indique l'hote du serveur mail
+			$mail->Host = 'smtp.mailtrap.io';
 
-		//indique le port de l'hote
-		$mail->Port = 465;
-		//$mail->SMTPSecure = 'tls' ; //ajoute un encryptage pour la sécurité
-		$mail->SMTPAuth = true; //permet d'utiliser l'autentification SMTP
-		$mail->Username = '6887e3373ffc68'; //nom de l'utilisaateur de la boite recevante
-		$mail->Password = '6e8ac501074bdf';//mdp de la boite recevante
+			//indique le port de l'hote
+			$mail->Port = 465;
+			//$mail->SMTPSecure = 'tls' ; //ajoute un encryptage pour la sécurité
+			$mail->SMTPAuth = true; //permet d'utiliser l'autentification SMTP
+			$mail->Username = '6887e3373ffc68'; //nom de l'utilisaateur de la boite recevante
+			$mail->Password = '6e8ac501074bdf';//mdp de la boite recevante
 
+			
+			$mail->setFrom('contact@monresto.fr');//addresse de l'expediteur
+			$mail->addAddress($post['email']);//adress de destinataire
+
+			$mail->Subject = 'Mot de pass oublié ';//sujet du message
+			$content_mail = '<a href="http://localhost/php/projet_php_cinema/admin/reset_password.php?email=' . $post['email'] . '&token=' . $token.'"> Modifier mon mot de passe </a>';
+			var_dump('cliquez sur le liens suivants pour modifier votre mot de passe : ' . $content_mail);
+			$mail->msgHTML($content_mail);//message en lui même, la fonction 'nl2br' permet d'enregistrer les retour à la ligne dans le message et de les convertir au format html afin de les conser
+
+			if (!$mail->send()){
+				echo "Mailer Error" . $mail->ErrorInfo;
+			}
+		} // fin if (isset($email) && !empty($email))
 		
-		$mail->setFrom('contact@monresto.fr');//addresse de l'expediteur
-		$mail->addAddress($post['email']);//adress de destinataire
-
-		$mail->Subject = 'Mot de pass oublié ';//sujet du message
-		$content_mail = '<a href="http://localhost/php/projet_php_cinema/admin/reset_password.php?email=' . $post['email'] . '&token=' . $token.'"> Modifier mon mot de passe </a>';
-		var_dump('cliquez sur le liens suivants pour modifier votre mot de passe : ' . $content_mail);
-		$mail->msgHTML($content_mail);//message en lui même, la fonction 'nl2br' permet d'enregistrer les retour à la ligne dans le message et de les convertir au format html afin de les conser
-
-		if (!$mail->send()){
-			echo "Mailer Error" . $mail->ErrorInfo;
-		}
-	}
+	} // fin if(count($errors) === 0)
 
 	else{
 		$formValid = false;
@@ -97,7 +104,7 @@ if(!empty($_POST)){
 		<!-- affichage du message de confirmation ou des erreurs -->
 		<?php if(isset($formValid) && $formValid == true):?>
 
-		<p style="color:green; text-align: center">mail envoyé avec succès !</p>
+		<p style="color:green; text-align: center">Vous allez recevoir un email dans quelques instants si vous êtes bien enregistré sur notre site.</p>
 
 
 	
