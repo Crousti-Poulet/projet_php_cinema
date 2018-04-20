@@ -97,12 +97,19 @@
 
 				$formValid = true;
 
+				
+
+				
+
+			
+
 				// enregistrer l'image :
 				// modification du nom de l'image
 				 $newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
 				// read image from temporary file
 				$img = Image::make($_FILES['picture']['tmp_name']);
-
+				// resize image instance
+				$img->resize(350, 250);
 				// créer le répertoire s'il n'existe pas
 				if(!is_dir($dirUpload)){
 					mkdir($dirUpload,0755);

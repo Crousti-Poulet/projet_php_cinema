@@ -7,6 +7,8 @@
 
 	//Afin de pouvoir utiliser l'élément v de Respect/Validation
 	use Respect\Validation\Validator as v;
+	use Intervention\Image\ImageManagerStatic as Image;
+
 
 	require '../includes/connect.php'; // On inclut le fichier "connect" servant à se connecter à la base de données.
 
@@ -77,6 +79,10 @@
 				//enregistrer l'image
 				$newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
 
+				$img = Image::make($_FILES['picture']['tmp_name']);
+				//Resize image
+				$img->resize(250, 350);
+
 				// créer le répertoire s'il n'existe pas
 				if(!is_dir($dirUpload)){
 					mkdir($dirUpload,0755);
@@ -84,7 +90,10 @@
 
 				$pathname = $dirUpload.$newFileName;
 
-				if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
+				// save image
+				$img->save($pathname);
+
+				// if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
 					
 					$formValid = true;
 
@@ -104,10 +113,10 @@
 
 					header('Location: news_list.php');
 					die();
-				} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
-				else{
-					$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
-				}
+				//} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
+				// else{
+				// 	$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
+				// }
 				
 			} // fin du if(count($errors) === 0)
 			else {
