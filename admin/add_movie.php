@@ -109,7 +109,7 @@
 				// read image from temporary file
 				$img = Image::make($_FILES['picture']['tmp_name']);
 				// resize image instance
-				$img->resize(350, 250);
+				$img->resize(250, 350);
 				// créer le répertoire s'il n'existe pas
 				if(!is_dir($dirUpload)){
 					mkdir($dirUpload,0755);
