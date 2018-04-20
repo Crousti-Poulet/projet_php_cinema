@@ -7,6 +7,7 @@
 
 	//Afin de pouvoir utiliser l'élément v de Respect/Validation
 	use Respect\Validation\Validator as v;
+	use Intervention\Image\ImageManagerStatic as Image;
 
 	require '../includes/connect.php'; // pour se connecter à la BD
 
@@ -118,12 +119,19 @@
 							//enregistrer l'image
 							$newFileName = str_replace($search, $replace, time().'-'.$_FILES['picture']['name']);
 
+							$img = Image::make($_FILES['picture']['tmp_name']);
+							//resize image
+							$img->resize(250, 350);
+
 							// créer le répertoire s'il n'existe pas
 							if(!is_dir($dirUpload)){
 								mkdir($dirUpload,0755);
 							}
 
 							$pathname = $dirUpload.$newFileName;
+
+							//save image
+							$img->save($pathname);
 
 							if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
 								$formValid = true;
@@ -287,6 +295,8 @@
 					</div>
 
 					<button type="submit" class="btn">Enregistrer</button>
+					<br>
+					<a href="movie_list.php"> Retour à la liste des films</a>
 
 				</form>
 			</div>
