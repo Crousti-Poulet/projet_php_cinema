@@ -4,8 +4,8 @@
 
 
 	require 'includes/connect.php'; // pour se connecter à la BD
-		/*Preparation de la requête*/ 
-		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC LIMIT 4');
+		/*Preparation de la requête : 4 films max avec une séance le jour même*/ 
+		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies m INNER JOIN showtimes s ON m.id = s.id_movie WHERE DATE(s.showtime) = CURDATE() ORDER BY date_created DESC LIMIT 4');
 
 		/* Execution de la requete SQL */
 		// on effectue l'insertion

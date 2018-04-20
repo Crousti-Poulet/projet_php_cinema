@@ -5,8 +5,8 @@
 	$maxLengthStoryline = 110;
 
 
-		// nécessaire de récuperer l'ID mais inutile de l'afficher
-		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
+		// liste de tous les films avec une séance le jour même
+		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies m INNER JOIN showtimes s ON m.id = s.id_movie WHERE DATE(s.showtime) = CURDATE() ORDER BY date_created DESC'); 
 		$sth->execute();
 		$movies = $sth->fetchAll();
 
