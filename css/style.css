@@ -23,7 +23,7 @@ body, html{
 	padding-top: 10px;
 }
 
-.article-p{
+.article-p, td{
 	font-family: 'EB Garamond', serif;
 }
 

@@ -108,7 +108,7 @@ $days = $res->fetchAll();
 
 
 	 	<form method="post" class="contact container">
-	 		<label>Contactez-nous</label>
+	 		<h3>Contactez-nous</h3>
 	 		<fieldset class="contact offset-2 col-8 ">
 	 			<div class="form-group">
 		 			<label>Nom</label>

@@ -23,6 +23,9 @@
 	<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet"> 
 	<link rel="stylesheet" type="text/css" href="css/header.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	
@@ -51,7 +54,6 @@
 						foreach($news as $new){
 							echo '<tr>';
 								echo '<td><a href="detail_news.php?id='.$new['id'].'"><i class="fas fa-search"></i></a></td>';
-								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td>'.$new['user_id'].'</td>';
 								echo '<td>'.$new['content'].'</td>';
