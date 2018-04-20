@@ -78,7 +78,7 @@ if(!empty($_POST)){
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Création utilisateur</title>
+	<title>Mot de passe oublié</title>
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -91,7 +91,7 @@ if(!empty($_POST)){
 		
 	<main>
 
-		<h2>Mot de passe oublié : </h2>
+		<h2>Entrez votre adresse email pour recevoir un lien pour redéfinir votre mot de passe : </h2>
 
 
 		<!-- affichage du message de confirmation ou des erreurs -->
