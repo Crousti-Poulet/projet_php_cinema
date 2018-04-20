@@ -192,7 +192,7 @@
 
 			<p style="color:green;">Actualité modifiée avec succès !</p>
 		
-		<?php header('Location: news_list.php');
+		<?php header('refresh:2;url=news_list.php');
 		die(); ?>
 			
 		
