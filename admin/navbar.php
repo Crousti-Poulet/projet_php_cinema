@@ -17,6 +17,9 @@
 					<a class="nav-link" href="add_movie.php">Ajouter film</a>
 				</li>
 				<li class="nav-item">
+					<a class="nav-link" href="add_showtime.php">Ajouter séance</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link" href="news_list.php">Actualités</a>
 				</li>
 				<li class="nav-item">
