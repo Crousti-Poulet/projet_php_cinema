@@ -132,14 +132,15 @@
 
 							//save image
 							$img->save($pathname);
+							$formValid = true;
 
-							if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
-								$formValid = true;
-							} // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
-							else{
-								$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
-								$formValid = false;
-							}
+							// if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname)){
+							// 	$formValid = true;
+							// } // fin du if(move_uploaded_file($_FILES['picture']['tmp_name'], $pathname))
+							// else{
+							// 	$errors[] = 'Erreur lors de l\'enregistrement de l\'image !';
+							// 	$formValid = false;
+							// }
 						}
 
 						if($formValid){ // pas d'image ou image uploadée avec succès
