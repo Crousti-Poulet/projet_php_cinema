@@ -29,7 +29,7 @@
 	
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
 		<h2>Liste des actualités</h2>
 
@@ -38,6 +38,7 @@
 			<table class="table table-striped table-hover" id="listeResas">
 				<thead class="thead-dark">
 					<tr>
+						<th>Détail</th>
 						<th>Titre</th>
 						<th>Auteur</th>
 						<th>Contenu</th>
@@ -50,6 +51,8 @@
 					<?php
 						foreach($news as $new){
 							echo '<tr>';
+								echo '<td><a href="detail_news.php?id='.$new['id'].'"><i class="fas fa-search"></i></a></td>';
+								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td>'.$new['user_id'].'</td>';
 								echo '<td>'.$new['content'].'</td>';

@@ -47,7 +47,7 @@
 	<!-- ajout du header -->
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
 		<!--les 4 film de la première page-->
 		<h2 class="main-title mt-5 mb-2 text-center">Les films du moments!</h2>
