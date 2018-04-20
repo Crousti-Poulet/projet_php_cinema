@@ -4,8 +4,8 @@
 
 
 	require 'includes/connect.php'; // pour se connecter à la BD
-		/*Preparation de la requête*/ 
-		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC LIMIT 4');
+		/*Preparation de la requête : 4 films max avec une séance le jour même*/ 
+		$sth = $bdd->prepare('SELECT DISTINCT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies m INNER JOIN showtimes s ON m.id = s.id_movie WHERE DATE(s.showtime) = CURDATE() ORDER BY date_created DESC LIMIT 4');
 
 		/* Execution de la requete SQL */
 		// on effectue l'insertion
@@ -31,15 +31,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Main  Page</title>
+	<title>Cinéma Terrine</title>
 	<link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet"> 
-
-
 	<link rel="stylesheet" type="text/css" href="css/header.css">
-
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
@@ -47,7 +44,7 @@
 	<!-- ajout du header -->
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
 		<!--les 4 film de la première page-->
 		<h2 class="main-title mt-5 mb-2 text-center">Les films du moments!</h2>
