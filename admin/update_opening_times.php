@@ -95,7 +95,7 @@
 		<!-- fonts start -->
 		<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 		<!-- fonts end -->
-		<title>Modifier une fiche de film</title>
+		<title>Modifier un horaire d'ouverture du cinéma</title>
 	</head>
 	<body>
 
@@ -103,7 +103,7 @@
 
 	<main class="container">
 
-		<h2>Modification des horaires d'ouverture du jour "<?php if(isset($_GET['day']) && !empty($_GET['day'])) {echo $_GET['day'];}else{echo '?';} ?>" ? </h2>
+		<h2>Modification des horaires d'ouverture du jour "<?php if(isset($_GET['day']) && !empty($_GET['day'])) {echo $_GET['day'];}else{echo '?';} ?>"</h2>
 
 
 		<?php 
