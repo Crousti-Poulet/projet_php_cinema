@@ -86,7 +86,7 @@ $days = $res->fetchAll();
  <html lang="en">
  <head>
  	<meta charset="UTF-8">
- 	<title>inscription</title>
+ 	<title>Informations</title>
  	<link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  	<link rel="stylesheet" type="text/css" href="css/header.css">
@@ -95,7 +95,7 @@ $days = $res->fetchAll();
  <body>
 
 
-	<main>
+	<main class="mainFront">
 
 		<?php include 'header.php' ?>
 
@@ -108,7 +108,7 @@ $days = $res->fetchAll();
 
 
 	 	<form method="post" class="contact container">
-	 		<label>Contactez-nous</label>
+	 		<h3>Contactez-nous</h3>
 	 		<fieldset class="contact offset-2 col-8 ">
 	 			<div class="form-group">
 		 			<label>Nom</label>

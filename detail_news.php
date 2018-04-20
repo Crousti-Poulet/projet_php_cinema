@@ -32,7 +32,7 @@
 	
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
 		<h2>Actualité <?= $news['title']  ?></h2>
 

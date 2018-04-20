@@ -37,10 +37,12 @@
 
 				$formValid = true;
 
+				$date_insert = $_POST['date'].' '.$_POST['time'].':00';
+
 				$sth = $bdd->prepare('INSERT INTO showtimes (id_movie, showtime) VALUES(:idMovie, :showtime)');
 
 				$sth->bindValue(':idMovie', $_POST['movie']);
-				$sth->bindValue(':showtime', $_POST['showtime']);
+				$sth->bindValue(':showtime', $date_insert);
 
 				$success = $sth->execute();
 
@@ -113,7 +115,12 @@
 
 					<div class="form-group">
 						<label for="showtime">Date de la séance :</label>
-						<input class="form-control col-3" type="date" name="showtime" id="showtime" value="<?php if (isset($_POST['showtime'])){echo $_POST['showtime'];} ?>">
+						<input class="form-control col-3" type="date" name="date" id="showtime" value="<?php if (isset($_POST['showtime'])){echo $_POST['showtime'];} ?>">
+					</div>
+
+					<div class="form-group">
+						<label for="showtime">Heure de la séance :</label>
+						<input type="time" name="time" id="showtime" class="form-control col-3">
 					</div>
 
 					<button type="submit" class="btn">Enregistrer</button>

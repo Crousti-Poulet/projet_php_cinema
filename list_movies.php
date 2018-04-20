@@ -5,8 +5,8 @@
 	$maxLengthStoryline = 110;
 
 
-		// nécessaire de récuperer l'ID mais inutile de l'afficher
-		$sth = $bdd->prepare('SELECT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies ORDER BY date_created DESC'); 
+		// liste de tous les films avec une séance le jour même
+		$sth = $bdd->prepare('SELECT DISTINCT id, title, length, date_release, genre, country, director, actors, storyline, poster_img_path, date_created, date_updated FROM movies m INNER JOIN showtimes s ON m.id = s.id_movie WHERE DATE(s.showtime) = CURDATE() ORDER BY date_created DESC'); 
 		$sth->execute();
 		$movies = $sth->fetchAll();
 
@@ -16,16 +16,14 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Cinéma</title>
+	<title>Films du jour</title>
 
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<!--lien vers les fiches de styles-->
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/header.css">
+	<link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-		<!--font google-->
-		<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/header.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		
 
@@ -34,9 +32,9 @@
 	
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
-		<h2>Films du jour</h2>
+		<h2 class="main-title">Films du jour</h2>
 
 
 

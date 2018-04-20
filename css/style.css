@@ -7,7 +7,7 @@ body, html{
 	font-family: 'Cinzel', serif;
 }
 
-main{
+.mainFront { /* classe pour les main de toutes les pages du front */
 	margin-top: 250px;
 }
 
@@ -23,7 +23,7 @@ main{
 	padding-top: 10px;
 }
 
-.article-p{
+.article-p, td{
 	font-family: 'EB Garamond', serif;
 }
 
@@ -59,7 +59,7 @@ main{
 
 h2, .horraire{
 	text-align: center;
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 }
 
 

@@ -32,7 +32,7 @@
 
 			
 			<div class="col-sm-3 col-md-6 d-flex justify-content-center">
-				<a class="btn border-left border-right  col-sm-3 col-md-10" href="contact.php" role="button"> - Contacts -</a>
+				<a class="btn border-left border-right  col-sm-3 col-md-10" href="contact.php" role="button"> - Contact -</a>
 			</div>	
 		</div>
 	</div>

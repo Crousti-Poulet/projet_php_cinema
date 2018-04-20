@@ -17,19 +17,21 @@
 	<meta charset="utf-8">
 	<title>Liste des actualités</title>
 
-		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<!-- les lien pour les css-->
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="css/header.css">
-		<!--lien pour les fonts-->
-		<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Cinzel:700" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/header.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
 </head>
 <body>
 	
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
 		<h2>Liste des actualités</h2>
 
@@ -38,6 +40,7 @@
 			<table class="table table-striped table-hover" id="listeResas">
 				<thead class="thead-dark">
 					<tr>
+						<th>Détail</th>
 						<th>Titre</th>
 						<th>Auteur</th>
 						<th>Contenu</th>
@@ -50,6 +53,7 @@
 					<?php
 						foreach($news as $new){
 							echo '<tr>';
+								echo '<td><a href="detail_news.php?id='.$new['id'].'"><i class="fas fa-search"></i></a></td>';
 								echo '<td><b>'.$new['title'].'</b></td>';
 								echo '<td>'.$new['user_id'].'</td>';
 								echo '<td>'.$new['content'].'</td>';
