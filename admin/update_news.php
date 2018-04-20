@@ -192,6 +192,10 @@
 
 			<p style="color:green;">Actualité modifiée avec succès !</p>
 		
+		<?php header('Location: news_list.php');
+		die(); ?>
+			
+		
 			<?php elseif(isset($formValid) && $formValid == true && !$success):?>
 		
 			<p style="color:red;">Erreur, actualité non modifiée</p>

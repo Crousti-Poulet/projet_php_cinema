@@ -216,6 +216,8 @@
 			<?php if(isset($formValid) && $formValid == true && $success):?>
 
 			<p style="color:green;">Fiche de film modifiée avec succès !</p>
+			<?php header('Location: movie_list.php');
+			die(); ?>
 		
 			<?php elseif(isset($formValid) && $formValid == true && !$success):?>
 		
