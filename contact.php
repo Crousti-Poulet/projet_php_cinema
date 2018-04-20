@@ -95,7 +95,7 @@ $days = $res->fetchAll();
  <body>
 
 
-	<main>
+	<main class="mainFront">
 
 		<?php include 'header.php' ?>
 

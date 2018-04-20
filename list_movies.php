@@ -34,9 +34,9 @@
 	
 	<?php include 'header.php' ?>
 
-	<main>
+	<main class="mainFront">
 
-		<h2>Films du jour</h2>
+		<h2 class="main-title">Films du jour</h2>
 
 
 
